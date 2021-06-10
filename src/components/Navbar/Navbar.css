@@ -1,0 +1,112 @@
+nav {
+  width: 0;
+  min-height: 100vh;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--lightBlue);
+  overflow: hidden;
+  transition: 0.1s;
+  overflow-y: hidden;
+}
+
+.close-btn {
+  width: 30px;
+  font-size: 40px;
+  position: absolute;
+  right: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-container {
+  width: 80%;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 15vh auto;
+}
+
+.btn-container button {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border: 1.5px solid white;
+  border-radius: 10px;
+}
+
+.nav-logo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.4;
+  position: absolute;
+  top: 55vh;
+}
+
+.nav-logo > img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  object-fit: cover;
+}
+
+.nav-logo > p {
+  font-family: "Lobster", cursive;
+  font-size: 20px;
+}
+
+.nav-dev-info {
+  width: 100%;
+  opacity: 0.4;
+  font-size: 15px;
+  position: absolute;
+  text-align: center;
+  bottom: calc(100vh - 90vh);
+}
+
+@media only screen and (max-width: 321px) {
+  .close-btn {
+    font-size: 30px;
+    right: 10px;
+  }
+
+  .btn-container button {
+    font-size: 16px;
+  }
+
+  .nav-logo {
+    top: 70vh;
+  }
+
+  .nav-logo > img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .nav-logo > p {
+    font-size: 15px;
+  }
+
+  .nav-dev-info {
+    font-size: 12px;
+    bottom: calc(100vh - 95vh);
+  }
+}
+
+@media only screen and (min-width: 321px) and (max-width: 374px) {
+  .nav-logo {
+    top: 60vh;
+  }
+}
