@@ -15,7 +15,7 @@ import "./App.css";
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background-color: ${(props) => props.theme.mode === "Dark" ? "#111" : "#eee"};
+    background-color: ${(props) => props.theme.mode === "Dark" ? "#2e2e2e" : "#eee"};
     color: ${(props) => (props.theme.mode === "Dark" ? "#eee" : "#111")}
   }
   
