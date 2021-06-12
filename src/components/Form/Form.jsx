@@ -1,10 +1,46 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Checkbox, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import "./Form.css";
+import { dataContext } from "../../Context";
+import storage from "local-storage-fallback";
 
+const inputStyle = {
+  marginTop: "30px",
+};
+
+const linkStyle = {
+  dark: {
+    color: "#eee",
+    textDecoration: "underline",
+  },
+  light: {
+    color: "#000",
+    textDecoration: "underline",
+  },
+};
+
+const btnStyle = {
+  dark: {
+    background: "#0821d4",
+  },
+  light: {
+    background: "#025ceb",
+  },
+};
+
+const checkboxStyle = {
+  dark: {
+    color: "#0821d4",
+  },
+  light: {
+    color: "#025ceb",
+  },
+};
+
+// Change input's border color
 const useStyles = makeStyles({
   root: {
     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
@@ -29,10 +65,18 @@ function Form({
   helperText,
   linkPage,
   theme,
+  fetchUrl,
+  page,
 }) {
   const classes = useStyles();
+  const { setAuthenticated, setUserData } =
+    useContext(dataContext);
 
   const [checked, setChecked] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [name, setName] = useState("");
 
   const hiddenInputStyle = {
     display: hiddenInput ? "none" : "",
@@ -41,42 +85,65 @@ function Form({
     display: hiddenCheck ? "none" : "",
   };
 
-  const inputStyle = {
-    marginTop: "30px",
+  const bodyData = () => {
+    return page === "login"
+      ? { email, password }
+      : page === "signup"
+      ? { name, email, password }
+      : "Error";
   };
 
-  const linkStyle = {
-    dark: {
-      color: "#eee",
-      textDecoration: "underline",
-    },
-    light: {
-      color: "#000",
-      textDecoration: "underline",
-    },
+  const setToStorage = (token) => {
+    storage.setItem("token", token);
   };
 
-  const btnStyle = {
-    dark: {
-      background: "#0821d4",
-    },
-    light: {
-      background: "#025ceb",
-    },
+  const handleFetchError = (err) => {
+    console.log(err);
   };
 
-  const checkboxStyle = {
-    dark: {
-      color: "#0821d4",
-    },
-    light: {
-      color: "#025ceb",
-    },
+  const history = useHistory();
+
+  const setUserInfos = (data) => {
+    if (data.error) {
+      handleFetchError(data.error);
+    } else {
+      setUserData(data.user);
+      setAuthenticated({ isLogged: data.logged });
+      setToStorage(data.token);
+      history.push("/");
+    }
+  };
+
+  const fetchData = () => {
+    fetch(fetchUrl, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bodyData()),
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((data) => setUserInfos(data))
+      .catch((err) => console.log(err));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (page === "signup") {
+      if (password === password2) {
+        fetchData();
+      } else {
+        alert("As senhas devem ser iguais");
+      }
+    } else {
+      fetchData();
+    }
   };
 
   return (
     <div className="form-container">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="inputs">
           <TextField
             style={hiddenInputStyle}
@@ -90,7 +157,9 @@ function Form({
             label="Name"
             variant="outlined"
             autoComplete="off"
-            // required={!hiddenInput}
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            required={!hiddenInput}
           />
           <TextField
             id="email"
@@ -104,7 +173,9 @@ function Form({
             variant="outlined"
             style={inputStyle}
             autoComplete="off"
-            // required
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            required
           />
           <TextField
             id="password"
@@ -119,7 +190,9 @@ function Form({
             autoComplete="current-password"
             variant="outlined"
             style={inputStyle}
-            // required
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            required
           />
           <TextField
             id="password-repeated"
@@ -133,7 +206,9 @@ function Form({
             autoComplete="current-password"
             variant="outlined"
             style={{ ...hiddenInputStyle, ...inputStyle }}
-            // required={!hiddenInput}
+            required={!hiddenInput}
+            onChange={(e) => setPassword2(e.target.value)}
+            value={password2}
           />
         </div>
         <div className="remember-checkbox" style={hiddenCheckStyle}>

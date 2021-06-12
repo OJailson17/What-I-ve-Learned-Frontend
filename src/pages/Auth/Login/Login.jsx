@@ -19,6 +19,8 @@ function Login({ theme }) {
         helperText="Sign Up"
         linkPage="/signup"
         theme={theme}
+        fetchUrl="/api/v1/user/login"
+        page="login"
       />
     </main>
   );

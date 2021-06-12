@@ -10,6 +10,7 @@ import DesktopHeader from "./components/Header/DesktopHeader";
 import MobileHeader from "./components/Header/MobileHeader";
 
 import { useWindowDimensions } from "./Helper/windowDimension";
+import {ApplicationProvider} from './Context'
 
 import "./App.css";
 
@@ -30,8 +31,10 @@ const getInitialTheme = () => {
   return savedTheme ? JSON.parse(savedTheme) : { mode: "Light" };
 };
 
+
+
 function App() {
-  const [authenticated, setAuthenticated] = useState(true);
+  // const [authenticated, setAuthenticated] = useState(true);
   const [theme, setTheme] = useState(getInitialTheme);
   const { width } = useWindowDimensions();
 
@@ -39,19 +42,19 @@ function App() {
     storage.setItem("theme", JSON.stringify(theme));
   }, [theme]);
 
+
   return (
     <>
+    <ApplicationProvider>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         {width >= 768 ? (
           <DesktopHeader
-            authenticated={authenticated}
             theme={theme}
             setTheme={setTheme}
           />
         ) : (
           <MobileHeader
-            authenticated={authenticated}
             theme={theme}
             setTheme={setTheme}
           />
@@ -74,6 +77,7 @@ function App() {
           </Router>
         </div>
       </ThemeProvider>
+      </ApplicationProvider>
     </>
   );
 }

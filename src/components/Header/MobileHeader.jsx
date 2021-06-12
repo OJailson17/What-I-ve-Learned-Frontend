@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { dataContext } from "../../Context";
 import Navbar from "../Navbar/Navbar";
 
 import "./Header.css";
 
-function MobileHeader({ authenticated, theme, setTheme }) {
+function MobileHeader({ theme, setTheme }) {
   const [widthNav, setWidthNav] = useState(0);
 
+  const { authenticated } = useContext(dataContext)
   const openNav = () => {
     setWidthNav(100);
   };
 
   return (
     <>
-      <header>
+      <header>  
         <div className="header-container">
           <div className="logo">
             <a href="/">
@@ -21,7 +23,7 @@ function MobileHeader({ authenticated, theme, setTheme }) {
           </div>
           <div
             className="burger-menu"
-            hidden={!authenticated}
+            hidden={!authenticated.isLogged}
             onClick={openNav}
           >
             <div></div>

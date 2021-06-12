@@ -1,15 +1,20 @@
-import React from "react";
+import React, {useContext} from "react";
 import Lua from "@material-ui/icons/Brightness2";
 import Sol from "@material-ui/icons/Brightness4";
 
 import "./Header.css";
+import { dataContext } from "../../Context";
 
 const iconStyle = {
   fontSize: "30px",
   cursor: "pointer",
 };
 
-function DesktopHeader({ authenticated, style, theme, setTheme }) {
+function DesktopHeader({ style, theme, setTheme }) {
+
+  const {authenticated} = useContext(dataContext)
+  console.log(authenticated);
+  
   const changeTheme = () => {
     setTheme(theme.mode === "Dark" ? { mode: "Light" } : { mode: "Dark" });
   };
@@ -22,7 +27,7 @@ function DesktopHeader({ authenticated, style, theme, setTheme }) {
             <h1>What I've Learned</h1>
           </a>
         </div>
-        <div className="header-links" hidden={!authenticated}>
+        <div className="header-links" hidden={!authenticated.isLogged}>
           <ul>
             <li>
               <a href="/">About</a>
