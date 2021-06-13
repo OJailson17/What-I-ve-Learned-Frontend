@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import Form from "../../../components/Form/Form";
 import PageTitle from "../../../components/PageTitle/PageTitle";
+import { dataContext } from "../../../Context";
 
-function Signup({ theme }) {
+function Signup({ theme = {mode: "Dark"} }) {
+  const { authenticated } = useContext(dataContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (authenticated.isLogged === true) {
+      history.push("/");
+    }
+  }, []);
+
   return (
     <>
       <main className="container">

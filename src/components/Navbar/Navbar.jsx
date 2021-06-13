@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { dataContext } from "../../Context";
 import logo from "../../images/logo-icon.svg";
 
 import "./Navbar.css";
 
 function Navbar({ widthNav, setWidthNav, theme, setTheme }) {
+  const {logOut} = useContext(dataContext)
+  
   const closeNav = () => {
     setWidthNav(0);
   };
+
 
   const changeTheme = (e) => {
     setTheme(theme.mode === "Dark" ? { mode: "Light" } : { mode: "Dark" });
@@ -22,7 +26,7 @@ function Navbar({ widthNav, setWidthNav, theme, setTheme }) {
         <button onClick={changeTheme}>
           {theme.mode === "Dark" ? "Light" : "Dark"}
         </button>
-        <button>Log out</button>
+        <button onClick={logOut}>Log out</button>
       </div>
       <div className="nav-logo">
         <img src={logo} alt="" />

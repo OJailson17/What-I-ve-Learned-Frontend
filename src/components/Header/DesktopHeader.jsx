@@ -11,7 +11,7 @@ const iconStyle = {
 };
 
 function DesktopHeader({ style, theme, setTheme }) {
-
+  const {logOut} = useContext(dataContext)
   const {authenticated} = useContext(dataContext)
   console.log(authenticated);
   
@@ -32,8 +32,8 @@ function DesktopHeader({ style, theme, setTheme }) {
             <li>
               <a href="/">About</a>
             </li>
-            <li>
-              <a href="/">Log out</a>
+            <li onClick={logOut}>
+              Log out
             </li>
             <li onClick={changeTheme}>
               {theme.mode === "Dark" ? (
