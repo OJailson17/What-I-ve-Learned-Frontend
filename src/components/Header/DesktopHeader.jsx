@@ -32,7 +32,7 @@ function DesktopHeader({ style, theme, setTheme }) {
             <li>
               <a href="/">About</a>
             </li>
-            <li onClick={logOut}>
+            <li onClick={logOut} style={{cursor: "pointer"}}>
               Log out
             </li>
             <li onClick={changeTheme}>

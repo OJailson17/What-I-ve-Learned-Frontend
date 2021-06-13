@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Form from "../../../components/Form/Form";
 import PageTitle from "../../../components/PageTitle/PageTitle";
@@ -10,13 +10,13 @@ const styles = {
   height: "100%",
 };
 
-function Login({ theme }) {
-  const {authenticated} = useContext(dataContext)
+function Login() {
+  const {authenticated, theme} = useContext(dataContext)
   const history = useHistory()
 
   useEffect(() => {
     if(authenticated.isLogged === true) {
-      <Redirect to="/" />
+      history.push("/");
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

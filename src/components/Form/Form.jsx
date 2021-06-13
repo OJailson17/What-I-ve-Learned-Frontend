@@ -162,6 +162,7 @@ function Form({
             required={!hiddenInput}
           />
           <TextField
+            type="email"
             id="email"
             name="email"
             className={

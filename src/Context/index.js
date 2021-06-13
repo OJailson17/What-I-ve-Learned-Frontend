@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import storage from "local-storage-fallback";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 export const dataContext = createContext();
 
@@ -9,9 +9,16 @@ const getLoggedInfo = () => {
   return isLogged ? JSON.parse(isLogged) : { isLogged: false };
 };
 
+const getInitialTheme = () => {
+  const savedTheme = storage.getItem("theme");
+  return savedTheme ? JSON.parse(savedTheme) : { mode: "Light" };
+};
+
 export const ApplicationProvider = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(getLoggedInfo);
   const [userInfo, setUserData] = useState({});
+  const [theme, setTheme] = useState(getInitialTheme);
+
   
   // const history = useHistory()
   const logOut = () => {
@@ -30,11 +37,15 @@ export const ApplicationProvider = ({ children }) => {
     if (!token) setAuthenticated({ isLogged: false });
   }, []);
 
+  useEffect(() => {
+    storage.setItem("theme", JSON.stringify(theme));
+  }, [theme]);
+
 
 
   return (
     <dataContext.Provider
-      value={{ authenticated, setAuthenticated, userInfo, setUserData, logOut }}
+      value={{ authenticated, setAuthenticated, userInfo, setUserData, logOut, theme, setTheme }}
     >
       {children}
     </dataContext.Provider>

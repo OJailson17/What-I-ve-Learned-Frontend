@@ -1,7 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-import storage from "local-storage-fallback";
 
 import Login from "./pages/Auth/Login/Login";
 import Signup from "./pages/Auth/Signup/Signup";
@@ -28,55 +27,39 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const getInitialTheme = () => {
-  const savedTheme = storage.getItem("theme");
-  return savedTheme ? JSON.parse(savedTheme) : { mode: "Light" };
-};
-
 // Application Function
 function App() {
-  const [theme, setTheme] = useState(getInitialTheme);
   const { width } = useWindowDimensions();
-  const { authenticated } = useContext(dataContext);
-  console.log(authenticated);
-
-  useEffect(() => {
-    storage.setItem("theme", JSON.stringify(theme));
-  }, [theme]);
+  const { authenticated, theme, setTheme } = useContext(dataContext);
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <Router>
       {width >= 768 ? (
         <DesktopHeader theme={theme} setTheme={setTheme} />
       ) : (
         <MobileHeader theme={theme} setTheme={setTheme} />
       )}
-      <div className="App">
-        <Router>
           <Switch>
             <ProtectedRoutes
               exact
               path="/"
               authenticated={authenticated.isLogged}
-              component={() => <Home theme={theme} />}
+              component={Home}
             />
-            {/* <Route exact path="/"><Home theme={theme} /></Route> */}
-            {/* <Route
-              exact
-              path="/signup"
-            >
-              <Signup theme={theme} />
-            </Route> */}
-            <Route exact path="/signup" component={() => <Signup />} />
             <Route
               exact
-              path="/login">
-                <Login theme={theme} />
-              </Route>
+              path="/signup"
+              component={Signup}
+            />
+            <Route
+              exact
+              path="/login"
+              component={Login}
+            />
           </Switch>
-        </Router>
-      </div>
+      </Router>
     </ThemeProvider>
   );
 }

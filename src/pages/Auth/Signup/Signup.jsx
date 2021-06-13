@@ -5,14 +5,16 @@ import Form from "../../../components/Form/Form";
 import PageTitle from "../../../components/PageTitle/PageTitle";
 import { dataContext } from "../../../Context";
 
-function Signup({ theme = {mode: "Dark"} }) {
-  const { authenticated } = useContext(dataContext);
+function Signup() {
+
+  const { authenticated, theme } = useContext(dataContext);
   const history = useHistory();
 
   useEffect(() => {
     if (authenticated.isLogged === true) {
       history.push("/");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
