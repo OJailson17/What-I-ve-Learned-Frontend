@@ -13,7 +13,6 @@ const iconStyle = {
 function DesktopHeader({ style, theme, setTheme }) {
   const {logOut} = useContext(dataContext)
   const {authenticated} = useContext(dataContext)
-  console.log(authenticated);
   
   const changeTheme = () => {
     setTheme(theme.mode === "Dark" ? { mode: "Light" } : { mode: "Dark" });

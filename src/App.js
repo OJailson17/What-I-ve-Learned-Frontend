@@ -13,6 +13,7 @@ import { useWindowDimensions } from "./Helper/windowDimension";
 import { dataContext } from "./Context";
 
 import "./App.css";
+import CreatePost from "./pages/Posts/CreatePost";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -36,11 +37,11 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
-      {width >= 768 ? (
-        <DesktopHeader theme={theme} setTheme={setTheme} />
-      ) : (
-        <MobileHeader theme={theme} setTheme={setTheme} />
-      )}
+          {width >= 768 ? (
+            <DesktopHeader theme={theme} setTheme={setTheme} />
+          ) : (
+            <MobileHeader theme={theme} setTheme={setTheme} />
+          )}
           <Switch>
             <ProtectedRoutes
               exact
@@ -48,16 +49,9 @@ function App() {
               authenticated={authenticated.isLogged}
               component={Home}
             />
-            <Route
-              exact
-              path="/signup"
-              component={Signup}
-            />
-            <Route
-              exact
-              path="/login"
-              component={Login}
-            />
+            <ProtectedRoutes exact path="/post/create" authenticated={authenticated.isLogged} component={CreatePost}/>
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
           </Switch>
       </Router>
     </ThemeProvider>

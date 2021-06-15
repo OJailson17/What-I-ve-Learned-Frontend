@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import storage from "local-storage-fallback";
-// import { useHistory } from "react-router-dom";
 
 export const dataContext = createContext();
 
@@ -19,14 +18,11 @@ export const ApplicationProvider = ({ children }) => {
   const [userInfo, setUserData] = useState({});
   const [theme, setTheme] = useState(getInitialTheme);
 
-  
-  // const history = useHistory()
   const logOut = () => {
-    storage.removeItem("token")
-    setAuthenticated({isLogged: false})
-    window.location.reload()
-    // history.push("/login")
-  }
+    storage.removeItem("token");
+    setAuthenticated({ isLogged: false });
+    window.location.reload();
+  };
 
   useEffect(() => {
     storage.setItem("isLogged", JSON.stringify(authenticated));
@@ -41,11 +37,17 @@ export const ApplicationProvider = ({ children }) => {
     storage.setItem("theme", JSON.stringify(theme));
   }, [theme]);
 
-
-
   return (
     <dataContext.Provider
-      value={{ authenticated, setAuthenticated, userInfo, setUserData, logOut, theme, setTheme }}
+      value={{
+        authenticated,
+        setAuthenticated,
+        userInfo,
+        setUserData,
+        logOut,
+        theme,
+        setTheme,
+      }}
     >
       {children}
     </dataContext.Provider>

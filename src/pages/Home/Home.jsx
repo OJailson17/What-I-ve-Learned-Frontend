@@ -10,7 +10,7 @@ function Home() {
   const {theme} = useContext(dataContext)
 
   return (
-    <div className="app">
+    <div className="app" style={{minHeight: "100vh", position: "relative", paddingBottom: "2.5rem"}}>
       <SearchBar theme={theme} />
       <Categories theme={theme} />
       <Recents theme={theme} />
