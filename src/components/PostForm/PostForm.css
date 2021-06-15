@@ -1,0 +1,31 @@
+.post-form {
+    width: 100%;
+    max-width: 900px;
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 190px;
+    font-size: 17px;
+}
+
+.post-form .input {
+    width: 85%;
+}
+
+.post-form .post-form-category {
+    width: 85%;
+}
+
+.post-form .post-form-body  {
+    width: 85%;
+}
+
+.post-form .post-form-btn {
+    width: 50%;
+    max-width: 250px;
+    height: 35px;
+    margin-top: 20px;
+}

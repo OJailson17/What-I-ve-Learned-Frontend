@@ -20,7 +20,7 @@ const buttonStyles = {
 
 function NewPost() {
   return (
-    <Link to={"/"} style={buttonStyles}>
+    <Link to={"/post/create"} style={buttonStyles}>
       New Post
       <AddIcon style={{ color: `${blue}` }} />
     </Link>
