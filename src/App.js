@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 
@@ -33,26 +33,34 @@ function App() {
   const { width } = useWindowDimensions();
   const { authenticated, theme, setTheme } = useContext(dataContext);
 
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
-          {width >= 768 ? (
-            <DesktopHeader theme={theme} setTheme={setTheme} />
-          ) : (
-            <MobileHeader theme={theme} setTheme={setTheme} />
-          )}
-          <Switch>
+        <Switch>
+        <div className="App">
+           { width >= 768 ? (
+              <DesktopHeader theme={theme} setTheme={setTheme} />
+            ) : (
+              <MobileHeader theme={theme} setTheme={setTheme} />
+            )}
             <ProtectedRoutes
               exact
               path="/"
               authenticated={authenticated.isLogged}
               component={Home}
             />
-            <ProtectedRoutes exact path="/post/create" authenticated={authenticated.isLogged} component={CreatePost}/>
+            <ProtectedRoutes
+              exact
+              path="/post/create"
+              authenticated={authenticated.isLogged}
+              component={CreatePost}
+            />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
-          </Switch>
+          </div>
+        </Switch>
       </Router>
     </ThemeProvider>
   );

@@ -51,9 +51,7 @@ function Form({
   page,
 }) {
   const classes = useStyles();
-  const { setAuthenticated, setUserData } =
-    useContext(dataContext);
-
+  const { setAuthenticated, setUserData } = useContext(dataContext);
   const [checked, setChecked] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -40,3 +40,16 @@ a {
 ul li {
   list-style: none;
 }
+
+/* .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+} */
+
+/* .load-icon {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+} */
