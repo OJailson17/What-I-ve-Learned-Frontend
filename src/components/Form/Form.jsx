@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Button, Checkbox, TextField } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { Link, useHistory } from "react-router-dom";
-
-import "./Form.css";
-import { dataContext } from "../../Context";
 import storage from "local-storage-fallback";
+
+import { dataContext } from "../../Context";
+import { useStyles } from '../../Helper/changeInputColor'
+import "./Form.css";
 
 const inputStyle = {
   marginTop: "30px",
@@ -39,24 +39,6 @@ const checkboxStyle = {
     color: "#025ceb",
   },
 };
-
-// Change input's border color
-const useStyles = makeStyles({
-  root: {
-    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      borderColor: "white",
-    },
-    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      borderColor: "blue",
-    },
-    "& .MuiOutlinedInput-input": {
-      color: "white",
-    },
-    "& .MuiInputLabel-outlined": {
-      color: "#c5c5c5",
-    },
-  },
-});
 
 function Form({
   buttonText,
@@ -143,7 +125,7 @@ function Form({
 
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} class="auth-form">
         <div className="inputs">
           <TextField
             style={hiddenInputStyle}

@@ -2,11 +2,31 @@ import React from "react";
 
 import "./Footer.css";
 
-const footerDarkStyle = {
-  backgroundColor: "#0821d4",
-};
+function Footer({ theme, positioning }) {
+  const footerDarkStyle = {
+    backgroundColor: "#0821d4",
+  };
 
-function Footer({ theme }) {
+  const footerStyle = {
+    position: "absolute",
+    bottom: 0,
+    overflowY: "hidden"
+  };
+
+  // const setFooterStyle = (dark, position) => {
+  //   if (dark === "Dark" && position === true) {
+  //     return { footerDarkStyle, ...footerStyle };
+  //   }
+
+  //   if (dark === "Dark" && position === false) {
+  //     return footerDarkStyle;
+  //   }
+
+  //   if (position === true) {
+  //     return footerStyle;
+  //   }
+  // };
+
   return (
     <footer style={theme.mode === "Dark" ? footerDarkStyle : {}}>
       <div className="social-media-container">
