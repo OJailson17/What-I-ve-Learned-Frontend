@@ -1,6 +1,7 @@
 import React from "react";
 import AddIcon from "@material-ui/icons/Add";
 import { Link } from "react-router-dom";
+import storage from "local-storage-fallback";
 
 const blue = "#025ceb";
 
@@ -18,9 +19,14 @@ const buttonStyles = {
   color: `${blue}`,
 };
 
+const getUserId = () => {
+  return storage.getItem("userId")
+}
+
 function NewPost() {
+  
   return (
-    <Link to={"/post/create"} style={buttonStyles}>
+    <Link to={`${getUserId()}/post/create`} style={buttonStyles}>
       New Post
       <AddIcon style={{ color: `${blue}` }} />
     </Link>

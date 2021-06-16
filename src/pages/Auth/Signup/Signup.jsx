@@ -6,7 +6,6 @@ import PageTitle from "../../../components/PageTitle/PageTitle";
 import { dataContext } from "../../../Context";
 
 function Signup() {
-
   const { authenticated, theme } = useContext(dataContext);
   const history = useHistory();
 
@@ -14,7 +13,7 @@ function Signup() {
     if (authenticated.isLogged === true) {
       history.push("/");
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

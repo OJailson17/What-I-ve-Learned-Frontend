@@ -7,11 +7,11 @@ function Footer({ theme, positioning }) {
     backgroundColor: "#0821d4",
   };
 
-  const footerStyle = {
-    position: "absolute",
-    bottom: 0,
-    overflowY: "hidden"
-  };
+  // const footerStyle = {
+  //   position: "absolute",
+  //   bottom: 0,
+  //   overflowY: "hidden"
+  // };
 
   // const setFooterStyle = (dark, position) => {
   //   if (dark === "Dark" && position === true) {

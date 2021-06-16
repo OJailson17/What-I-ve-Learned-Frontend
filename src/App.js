@@ -39,7 +39,8 @@ function App() {
       <GlobalStyle />
       <Router>
         <Switch>
-        <div className="App">
+    <>
+        {/* <div className="App"> */}
            { width >= 768 ? (
               <DesktopHeader theme={theme} setTheme={setTheme} />
             ) : (
@@ -53,13 +54,14 @@ function App() {
             />
             <ProtectedRoutes
               exact
-              path="/post/create"
+              path="/:userId/post/create"
               authenticated={authenticated.isLogged}
               component={CreatePost}
             />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
-          </div>
+          {/* </div> */}
+    </>
         </Switch>
       </Router>
     </ThemeProvider>

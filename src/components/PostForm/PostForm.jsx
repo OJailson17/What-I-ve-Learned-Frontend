@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import {
   TextField,
   Select,
@@ -9,15 +10,41 @@ import {
 } from "@material-ui/core";
 import { useStyles } from "../../Helper/changeInputColor";
 
-import "./PostForm.css";
 import { dataContext } from "../../Context";
+
+import "./PostForm.css";
 
 function PostForm({ btnText }) {
   const { theme } = useContext(dataContext);
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [body, setBody] = useState("");
   const classes = useStyles();
+  const { userId } = useParams();
+  const history = useHistory();
+
+  // Handle form submit
+  const handleCreatePostSubmit = (e) => {
+    e.preventDefault();
+
+    // API call to create post method on backend
+    fetch(`/api/v1/${userId}/post/create?_method=PATCH`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, category, body }),
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        history.push("/");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
-    <form className="post-form">
+    <form className="post-form" onSubmit={handleCreatePostSubmit}>
       {/* Title Input */}
       <TextField
         type="text"
@@ -32,6 +59,8 @@ function PostForm({ btnText }) {
         label="Title"
         size="medium"
         autoComplete="off"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
       />
 
       {/* Select */}
@@ -49,6 +78,8 @@ function PostForm({ btnText }) {
           id="post-category"
           label="Category"
           name="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
         >
           <MenuItem value="English">English</MenuItem>
           <MenuItem value="Programming">Programming</MenuItem>
@@ -68,6 +99,8 @@ function PostForm({ btnText }) {
         multiline
         rows={7}
         variant="outlined"
+        value={body}
+        onChange={(e) => setBody(e.target.value)}
       />
       <Button
         type="submit"

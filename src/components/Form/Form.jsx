@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Checkbox, TextField } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import storage from "local-storage-fallback";
 
 import { dataContext } from "../../Context";
-import { useStyles } from '../../Helper/changeInputColor'
+import { useStyles } from "../../Helper/changeInputColor";
 import "./Form.css";
 
 const inputStyle = {
@@ -51,7 +51,8 @@ function Form({
   page,
 }) {
   const classes = useStyles();
-  const { setAuthenticated, setUserData } = useContext(dataContext);
+  const { setAuthenticated, setUserInfo, userInfo, userId, setUserId } =
+    useContext(dataContext);
   const [checked, setChecked] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -64,6 +65,15 @@ function Form({
   const hiddenCheckStyle = {
     display: hiddenCheck ? "none" : "",
   };
+
+  useEffect(() => {
+    setUserId(userInfo._id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userInfo]);
+
+  useEffect(() => {
+    storage.setItem("userId", userId);
+  }, [userId]);
 
   const bodyData = () => {
     return page === "login"
@@ -83,17 +93,19 @@ function Form({
 
   const history = useHistory();
 
+  // Set user informations to states e redirect to home page
   const setUserInfos = (data) => {
     if (data.error) {
       handleFetchError(data.error);
     } else {
-      setUserData(data.user);
+      setUserInfo(data.user);
       setAuthenticated({ isLogged: data.logged });
       setToStorage(data.token);
       history.push("/");
     }
   };
 
+  // API call to backend
   const fetchData = () => {
     fetch(fetchUrl, {
       headers: {
@@ -107,6 +119,7 @@ function Form({
       .catch((err) => console.log(err));
   };
 
+  // Check if the password are equal e call fetch function
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -123,7 +136,7 @@ function Form({
 
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit} class="auth-form">
+      <form onSubmit={handleSubmit} className="auth-form">
         <div className="inputs">
           <TextField
             style={hiddenInputStyle}

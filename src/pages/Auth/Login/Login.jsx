@@ -11,17 +11,16 @@ const styles = {
 };
 
 function Login() {
-  const {authenticated, theme} = useContext(dataContext)
-  const history = useHistory()
+  const { authenticated, theme } = useContext(dataContext);
+  const history = useHistory();
 
   useEffect(() => {
-    if(authenticated.isLogged === true) {
+    if (authenticated.isLogged === true) {
       history.push("/");
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  
   return (
     <main style={styles}>
       <PageTitle title="Sign In" />

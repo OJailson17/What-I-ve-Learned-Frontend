@@ -1,6 +1,5 @@
 import React from "react";
 import NewPost from "../NewPost/NewPost";
-import { Link } from "react-router-dom";
 
 import "./Recents.css";
 
