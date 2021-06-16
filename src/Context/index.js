@@ -13,10 +13,13 @@ const getInitialTheme = () => {
   return savedTheme ? JSON.parse(savedTheme) : { mode: "Light" };
 };
 
+
 export const ApplicationProvider = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(getLoggedInfo);
-  const [userInfo, setUserData] = useState({});
+  const [userInfo, setUserInfo] = useState({});
   const [theme, setTheme] = useState(getInitialTheme);
+  const [userId, setUserId] = useState(userInfo?._id)
+
 
   const logOut = () => {
     storage.removeItem("token");
@@ -37,13 +40,17 @@ export const ApplicationProvider = ({ children }) => {
     storage.setItem("theme", JSON.stringify(theme));
   }, [theme]);
 
+
+
   return (
     <dataContext.Provider
       value={{
         authenticated,
         setAuthenticated,
         userInfo,
-        setUserData,
+        setUserInfo,
+        userId,
+        setUserId,
         logOut,
         theme,
         setTheme,
