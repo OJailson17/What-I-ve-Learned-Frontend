@@ -1,5 +1,7 @@
-import React from "react";
+import storage from "local-storage-fallback";
+import React, { useEffect, useState } from "react";
 import NewPost from "../NewPost/NewPost";
+import { formatDate } from "../../Helper/formatTime";
 
 import "./Recents.css";
 
@@ -8,26 +10,32 @@ const borderStyle = {
 };
 
 function Recents({ theme }) {
-  const postArr = [
-    {
-      id: 1234,
-      title: "My first post",
-      body: "Some Random Text here",
-      category: "English",
-    },
-    {
-      id: 12345,
-      title: "My second post",
-      body: "Some Random Text here",
-      category: "Programming",
-    },
-    {
-      id: 123456,
-      title: "My third post",
-      body: "Some Random Text here",
-      category: "English",
-    },
-  ];
+  const [posts, setPosts] = useState([])
+  const [postsArr, setPostsArr] = useState([])
+
+  const setPostsData = data => {
+    setPostsArr((data))
+  }
+
+  const getRecentPosts = () => {
+  const userId = storage.getItem("userId")
+
+    fetch(`/api/v1/${userId}/posts`)
+    .then(res => res.json())
+    .then(data => setPostsData(data.posts))
+    .catch(err => console.log(err))
+  }
+
+  useEffect(() => {
+    getRecentPosts()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    setPosts(postsArr.reverse().slice(0, 3))
+  }, [postsArr])
+
+
   return (
     <section className="recents-container">
       <div className="section-title">
@@ -36,26 +44,33 @@ function Recents({ theme }) {
       </div>
 
       <div className="posts-wrapper">
-        {postArr.map((element) => (
-          <div className="posts-container recent " key={element.id}>
+        {
+          posts.length <= 0 ? 
+          <p>Não há posts!</p>
+          :
+          posts.map((element) => (
+          (
+          <div className="posts-container recent " key={element?._id}>
             <div className="post-title">
               <span>
-                <strong>{element.title}</strong>
+                <strong>{element?.title}</strong>
               </span>
             </div>
             <div className="post-info">
               <span className="category-name">
-                Categorie - <strong>{element.category}</strong>
+                Categorie - <strong>{element?.category}</strong>
               </span>
-              <span className="post-date">29/05/2021 - 07:50</span>
+              <span className="post-date">{formatDate(element?.postDate)}</span>
             </div>
             <div className="post">
               <div style={theme.mode === "Dark" ? borderStyle : {}}>
-                <p>{element.body}</p>
+                <p>{element?.body}</p>
               </div>
             </div>
           </div>
-        ))}
+        )
+        ))
+        }
       </div>
     </section>
   );

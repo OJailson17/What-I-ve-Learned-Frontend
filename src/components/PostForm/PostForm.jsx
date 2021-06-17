@@ -80,6 +80,7 @@ function PostForm({ btnText }) {
           name="category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
+          required
         >
           <MenuItem value="English">English</MenuItem>
           <MenuItem value="Programming">Programming</MenuItem>
