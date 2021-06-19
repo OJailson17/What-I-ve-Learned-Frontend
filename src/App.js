@@ -14,6 +14,7 @@ import { dataContext } from "./Context";
 
 import "./App.css";
 import CreatePost from "./pages/Posts/CreatePost";
+import CategoryPost from "./pages/Posts/ShowPosts";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -40,7 +41,6 @@ function App() {
       <Router>
         <Switch>
     <>
-        {/* <div className="App"> */}
            { width >= 768 ? (
               <DesktopHeader theme={theme} setTheme={setTheme} />
             ) : (
@@ -60,7 +60,7 @@ function App() {
             />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
-          {/* </div> */}
+            <ProtectedRoutes exact path="/posts/:category" authenticated={authenticated.isLogged} component={CategoryPost} />
     </>
         </Switch>
       </Router>

@@ -13,13 +13,27 @@ const getInitialTheme = () => {
   return savedTheme ? JSON.parse(savedTheme) : { mode: "Light" };
 };
 
+const getUserId = () => {
+  return storage.getItem("userId")
+}
+
+
 
 export const ApplicationProvider = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(getLoggedInfo);
   const [userInfo, setUserInfo] = useState({});
   const [theme, setTheme] = useState(getInitialTheme);
   const [userId, setUserId] = useState(userInfo?._id)
+  const [allPosts, setAllPosts] = useState([])
 
+  
+  
+  const findUser = () => {
+    fetch(`/api/v1/user/${getUserId()}`)
+    .then(res => res.json())
+    .then(data => setAllPosts(data.user.posts))
+    .catch(err => console.log(err))
+  }
 
   const logOut = () => {
     storage.removeItem("token");
@@ -29,6 +43,7 @@ export const ApplicationProvider = ({ children }) => {
 
   useEffect(() => {
     storage.setItem("isLogged", JSON.stringify(authenticated));
+    findUser()
   }, [authenticated]);
 
   useEffect(() => {
@@ -51,6 +66,7 @@ export const ApplicationProvider = ({ children }) => {
         setUserInfo,
         userId,
         setUserId,
+        allPosts,
         logOut,
         theme,
         setTheme,

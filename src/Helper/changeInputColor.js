@@ -14,5 +14,11 @@ import { makeStyles } from "@material-ui/core/styles";
           "& .MuiInputLabel-outlined": {
             color: "#c5c5c5",
           },
+          "& .MuiTextField-root" : {
+            color: "white"
+          },
+          '& > *': {
+            color: "white",
+          },
         },
       });

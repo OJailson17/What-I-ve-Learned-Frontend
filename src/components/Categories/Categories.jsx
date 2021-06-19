@@ -17,17 +17,17 @@ function Categories({ theme }) {
         <h3>Categories</h3>
       </div>
       <div className="categories-wrapper">
-        <Link to={"/login"} style={theme.mode === "Dark" ? linkStyles : {}}>
+        <Link to={"/posts/English"} style={theme.mode === "Dark" ? linkStyles : {}}>
           <div className="english-categorie category">
             <span>English</span>
-            <img src={englishImage} alt="" />
+            <img loading="lazy" src={englishImage} alt="" />
           </div>
         </Link>
 
-        <Link to={"/signup"} style={theme.mode === "Dark" ? linkStyles : {}}>
+        <Link to={"/posts/Programming"} style={theme.mode === "Dark" ? linkStyles : {}}>
           <div className="programming-categorie category">
             <span>Programming</span>
-            <img src={programmingImage} alt="" />
+            <img loading="lazy" src={programmingImage} alt="" />
           </div>
         </Link>
       </div>

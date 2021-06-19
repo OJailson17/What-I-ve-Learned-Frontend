@@ -2,30 +2,10 @@ import React from "react";
 
 import "./Footer.css";
 
-function Footer({ theme, positioning }) {
+function Footer({ theme }) {
   const footerDarkStyle = {
     backgroundColor: "#0821d4",
   };
-
-  // const footerStyle = {
-  //   position: "absolute",
-  //   bottom: 0,
-  //   overflowY: "hidden"
-  // };
-
-  // const setFooterStyle = (dark, position) => {
-  //   if (dark === "Dark" && position === true) {
-  //     return { footerDarkStyle, ...footerStyle };
-  //   }
-
-  //   if (dark === "Dark" && position === false) {
-  //     return footerDarkStyle;
-  //   }
-
-  //   if (position === true) {
-  //     return footerStyle;
-  //   }
-  // };
 
   return (
     <footer style={theme.mode === "Dark" ? footerDarkStyle : {}}>
