@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import PostForm from "../../components/PostForm/PostForm";
 import Footer from "../../components/Footer/Footer";
 import { dataContext } from "../../Context";
@@ -10,6 +10,10 @@ const titleStyle = {
 
 function CreatePost() {
   const { theme } = useContext(dataContext);
+
+  useEffect(() => {
+    document.title = `What I've Learned - Create Post`
+  }, [])
 
   return (
     <>

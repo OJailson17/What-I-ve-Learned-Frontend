@@ -26,6 +26,7 @@ function Home() {
   }
 
   useEffect(() => {
+    document.title = `What I've Learned - Home`
     getRecentPosts()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

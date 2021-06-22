@@ -7,11 +7,12 @@ const borderStyle = {
     border: "1.5px solid #fff",
   };
 
-function Post({posts, theme }) {
+function Post({posts, theme }) {  
+  
     return (
         posts.map((element) => (
             (
-            <div className="posts-container recent " key={element?._id}>
+              <div className="posts-container recent " key={element?._id} >
               <div className="post-title">
                 <span>
                   <strong>{element?.title}</strong>
