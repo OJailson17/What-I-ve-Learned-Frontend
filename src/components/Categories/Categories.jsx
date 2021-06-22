@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import englishImage from "../../images/english-image.jpg";
 import programmingImage from "../../images/programming.jpeg";
 
@@ -15,19 +16,19 @@ function Categories({ theme }) {
         <h3>Categories</h3>
       </div>
       <div className="categories-wrapper">
-        <a href="/posts/English" style={theme.mode === "Dark" ? linkStyles : {}}>
+        <Link to={"/posts/English"} style={theme.mode === "Dark" ? linkStyles : {}}>
           <div className="english-categorie category">
             <span>English</span>
             <img loading="lazy" src={englishImage} alt="" />
           </div>
-        </a>
+        </Link>
 
-        <a href="/posts/Programming" style={theme.mode === "Dark" ? linkStyles : {}}>
+        <Link to={"/posts/Programming"} style={theme.mode === "Dark" ? linkStyles : {}}>
           <div className="programming-categorie category">
             <span>Programming</span>
             <img loading="lazy" src={programmingImage} alt="" />
           </div>
-        </a>
+        </Link>
       </div>
     </section>
   );
