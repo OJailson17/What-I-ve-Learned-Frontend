@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   TextField,
   Select,
@@ -14,13 +14,15 @@ import { dataContext } from "../../Context";
 
 import "./PostForm.css";
 
-function PostForm({ btnText }) {
+function PostForm({ btnText, fetchUrl, editData }) {
   const { theme } = useContext(dataContext);
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [body, setBody] = useState("");
+  const [postData, setPostData] = useState({
+    title: "",
+    category: "",
+    body: "",
+  });
+
   const classes = useStyles();
-  const { userId } = useParams();
   const history = useHistory();
 
   // Handle form submit
@@ -28,11 +30,15 @@ function PostForm({ btnText }) {
     e.preventDefault();
 
     // API call to create post method on backend
-    fetch(`/api/v1/${userId}/post/create?_method=PATCH`, {
+    fetch(fetchUrl, {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title, category, body }),
+      body: JSON.stringify({
+        title: postData.title,
+        category: postData.category,
+        body: postData.body,
+      }),
       method: "POST",
     })
       .then((res) => res.json())
@@ -42,6 +48,16 @@ function PostForm({ btnText }) {
       })
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    setPostData({
+      ...postData,
+      title: editData?.title,
+      category: editData?.category,
+      body: editData?.body,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editData]);
 
   return (
     <form className="post-form" onSubmit={handleCreatePostSubmit}>
@@ -59,8 +75,8 @@ function PostForm({ btnText }) {
         label="Title"
         size="medium"
         autoComplete="off"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setPostData({ ...postData, title: e.target.value })}
+        value={postData.title || ""}
       />
 
       {/* Select */}
@@ -78,8 +94,10 @@ function PostForm({ btnText }) {
           id="post-category"
           label="Category"
           name="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          value={postData.category || ""}
+          onChange={(e) =>
+            setPostData({ ...postData, category: e.target.value || "" })
+          }
           required
         >
           <MenuItem value="English">English</MenuItem>
@@ -100,8 +118,10 @@ function PostForm({ btnText }) {
         multiline
         rows={7}
         variant="outlined"
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
+        value={postData.body || ""}
+        onChange={(e) =>
+          setPostData({ ...postData, body: e.target.value || "" })
+        }
       />
       <Button
         type="submit"

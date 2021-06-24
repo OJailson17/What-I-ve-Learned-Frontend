@@ -15,6 +15,7 @@ import { dataContext } from "./Context";
 import "./App.css";
 import CreatePost from "./pages/Posts/CreatePost";
 import CategoryPost from "./pages/Posts/ShowPosts";
+import EditPost from "./pages/Posts/EditPost";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -61,6 +62,7 @@ function App() {
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
             <ProtectedRoutes exact path="/posts/:category" authenticated={authenticated.isLogged} component={CategoryPost} />
+            <Route exact path="/:userId/post/:postId/edit" component={EditPost} />
     </>
         </Switch>
       </Router>

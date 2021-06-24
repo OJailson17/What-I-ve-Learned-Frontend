@@ -1,6 +1,16 @@
 .posts-wrapper {
     margin-left: 22px;
     margin-bottom: 92px;
+}
+
+.posts-container {
+  width: 90%;
+  max-width: 700px;
+}
+
+  .post-header {
+    display: flex;
+    justify-content: space-between;
   }
 
   .post-title > span {
@@ -8,7 +18,7 @@
   }
   
   .post-info {
-    width: 85%;
+    width: 100%;
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
@@ -28,7 +38,7 @@
   }
   
   .post > div {
-    width: 90%;
+    width: 100%;
     min-height: 157px;
     border-radius: 10px;
     border: 1.5px solid black;
