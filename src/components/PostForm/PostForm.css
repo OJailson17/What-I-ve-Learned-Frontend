@@ -23,8 +23,14 @@
     width: 85%;
 }
 
+.buttons-form {
+    width: 85%;
+    display: flex;
+    justify-content: space-around;
+}
+
 .post-form .post-form-btn {
-    width: 50%;
+    width: 45%;
     max-width: 250px;
     height: 35px;
     margin-top: 20px;

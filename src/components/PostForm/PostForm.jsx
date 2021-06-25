@@ -14,7 +14,7 @@ import { dataContext } from "../../Context";
 
 import "./PostForm.css";
 
-function PostForm({ btnText, fetchUrl, editData }) {
+function PostForm({ btnText, fetchUrl, editData, deleteUrl }) {
   const { theme } = useContext(dataContext);
   const [postData, setPostData] = useState({
     title: "",
@@ -24,6 +24,11 @@ function PostForm({ btnText, fetchUrl, editData }) {
 
   const classes = useStyles();
   const history = useHistory();
+
+  const btnDarkTheme =
+    theme.mode === "Dark"
+      ? { background: "#0821d4" }
+      : { background: "#025ceb" };
 
   // Handle form submit
   const handleCreatePostSubmit = (e) => {
@@ -48,6 +53,16 @@ function PostForm({ btnText, fetchUrl, editData }) {
       })
       .catch((err) => console.log(err));
   };
+
+  // Handle Delete Post
+  const handleDeletePost = () => {
+    fetch(deleteUrl, {
+      method: "POST"
+    })
+    .then(res => res.json())
+    .then(data => history.push("/"))
+    .catch(err => console.log(err))
+  }
 
   useEffect(() => {
     setPostData({
@@ -123,19 +138,26 @@ function PostForm({ btnText, fetchUrl, editData }) {
           setPostData({ ...postData, body: e.target.value || "" })
         }
       />
-      <Button
-        type="submit"
-        className="post-form-btn"
-        variant="contained"
-        color="primary"
-        style={
-          theme.mode === "Dark"
-            ? { background: "#0821d4" }
-            : { background: "#025ceb" }
-        }
-      >
-        {btnText}
-      </Button>
+      <div className="buttons-form">
+        <Button
+          type="submit"
+          className="post-form-btn"
+          variant="contained"
+          color="primary"
+          style={btnDarkTheme}
+        >
+          {btnText}
+        </Button>
+        <Button
+          className="post-form-btn"
+          variant="contained"
+          color="primary"
+          style={{ ...btnDarkTheme, ...btnText === "Create" ? {display: "none"} : {} }}
+          onClick={handleDeletePost}
+        >
+          Delete
+        </Button>
+      </div>
     </form>
   );
 }

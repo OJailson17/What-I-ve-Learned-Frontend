@@ -38,6 +38,7 @@ function EditPost() {
         <PostForm
           btnText="Update"
           fetchUrl={`/api/v1/${userId}/post/${postId}/edit?_method=PATCH`}
+          deleteUrl={`/api/v1/${userId}/post/${postId}/delete?_method=PATCH`}
           editData={postData?.post}
         />
       </section>
