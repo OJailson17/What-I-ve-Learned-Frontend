@@ -35,14 +35,13 @@ function App() {
   const { width } = useWindowDimensions();
   const { authenticated, theme, setTheme } = useContext(dataContext);
 
-
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
         <Switch>
-    <>
-           { width >= 768 ? (
+          <>
+            {width >= 768 ? (
               <DesktopHeader theme={theme} setTheme={setTheme} />
             ) : (
               <MobileHeader theme={theme} setTheme={setTheme} />
@@ -61,9 +60,19 @@ function App() {
             />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
-            <ProtectedRoutes exact path="/posts/:category" authenticated={authenticated.isLogged} component={CategoryPost} />
-            <Route exact path="/:userId/post/:postId/edit" component={EditPost} />
-    </>
+            <ProtectedRoutes
+              exact
+              path="/posts/:category"
+              authenticated={authenticated.isLogged}
+              component={CategoryPost}
+            />
+            <ProtectedRoutes
+              exact
+              path="/:userId/post/:postId/edit"
+              authenticated={authenticated.isLogged}
+              component={EditPost}
+            />
+          </>
         </Switch>
       </Router>
     </ThemeProvider>
