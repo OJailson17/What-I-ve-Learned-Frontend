@@ -1,24 +1,28 @@
 import React, { useContext } from "react";
-import {Link, useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import { dataContext } from "../../Context";
 import logo from "../../images/logo-icon.svg";
 
 import "./Navbar.css";
 
-function Navbar({ widthNav, setWidthNav, theme, setTheme }) {
-  const {logOut} = useContext(dataContext)
+function Navbar({ widthNav, setWidthNav, theme, setTheme}) {
+  const { logOut, pageLocation } = useContext(dataContext);
 
-  const history = useHistory()
-  
+  const history = useHistory();
+
   const closeNav = () => {
     setWidthNav(0);
   };
 
-  const gotToAboutPage = () => {
-    closeNav()
-    history.push("/about")
-  }
+  const goToAboutPage = () => {
+    closeNav();
+    history.push("/about");
+  };
 
+  const goToHomePage = () => {
+    closeNav();
+    history.push("/");
+  };
 
   const changeTheme = (e) => {
     setTheme(theme.mode === "Dark" ? { mode: "Light" } : { mode: "Dark" });
@@ -30,7 +34,10 @@ function Navbar({ widthNav, setWidthNav, theme, setTheme }) {
         &times;
       </div>
       <div className="btn-container">
-        <button onClick={gotToAboutPage}>About</button>
+      {pageLocation === "/about"
+      ? <button onClick={goToHomePage}>Home</button>
+      : <button onClick={goToAboutPage}>About</button>}
+        
         <button onClick={changeTheme}>
           {theme.mode === "Dark" ? "Light" : "Dark"}
         </button>

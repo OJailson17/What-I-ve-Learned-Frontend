@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Logo from "../../images/logo-icon.svg";
 import MyPhoto from '../../images/myPhoto.jpg'
 import Footer from '../../components/Footer/Footer'
@@ -14,7 +14,12 @@ const titleStyle = {
 };
 
 function About() {
-    const {theme} = useContext(dataContext)
+    const {theme, setPageLocation} = useContext(dataContext)
+
+    useEffect(() => {
+      setPageLocation(window.location.pathname)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     
   return (
       <>

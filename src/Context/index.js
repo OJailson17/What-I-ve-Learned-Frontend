@@ -25,6 +25,7 @@ export const ApplicationProvider = ({ children }) => {
   const [theme, setTheme] = useState(getInitialTheme);
   const [userId, setUserId] = useState(userInfo?._id)
   const [allPosts, setAllPosts] = useState([])
+  const [pageLocation, setPageLocation] = useState("")
 
   
   
@@ -70,6 +71,8 @@ export const ApplicationProvider = ({ children }) => {
         logOut,
         theme,
         setTheme,
+        pageLocation,
+        setPageLocation
       }}
     >
       {children}

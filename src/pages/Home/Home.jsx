@@ -8,7 +8,7 @@ import { dataContext } from "../../Context";
 
 
 function Home() {
-  const {theme} = useContext(dataContext)
+  const {theme, setPageLocation} = useContext(dataContext)
   const [posts, setPosts] = useState([])
   const [postsArr, setPostsArr] = useState([])
 
@@ -28,6 +28,7 @@ function Home() {
   useEffect(() => {
     document.title = `What I've Learned - Home`
     getRecentPosts()
+    setPageLocation(window.location.pathname)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
