@@ -1,9 +1,10 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import Lua from "@material-ui/icons/Brightness2";
 import Sol from "@material-ui/icons/Brightness4";
 
-import "./Header.css";
 import { dataContext } from "../../Context";
+import "./Header.css";
 
 const iconStyle = {
   fontSize: "30px",
@@ -11,9 +12,9 @@ const iconStyle = {
 };
 
 function DesktopHeader({ style, theme, setTheme }) {
-  const {logOut} = useContext(dataContext)
-  const {authenticated} = useContext(dataContext)
-  
+  const { logOut } = useContext(dataContext);
+  const { authenticated } = useContext(dataContext);
+
   const changeTheme = () => {
     setTheme(theme.mode === "Dark" ? { mode: "Light" } : { mode: "Dark" });
   };
@@ -29,9 +30,9 @@ function DesktopHeader({ style, theme, setTheme }) {
         <div className="header-links" hidden={!authenticated.isLogged}>
           <ul>
             <li>
-              <a href="/">About</a>
+              <Link to="/about">About</Link>
             </li>
-            <li onClick={logOut} style={{cursor: "pointer"}}>
+            <li onClick={logOut} style={{ cursor: "pointer" }}>
               Log out
             </li>
             <li onClick={changeTheme}>

@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import {Link, useHistory} from 'react-router-dom'
 import { dataContext } from "../../Context";
 import logo from "../../images/logo-icon.svg";
 
@@ -6,10 +7,17 @@ import "./Navbar.css";
 
 function Navbar({ widthNav, setWidthNav, theme, setTheme }) {
   const {logOut} = useContext(dataContext)
+
+  const history = useHistory()
   
   const closeNav = () => {
     setWidthNav(0);
   };
+
+  const gotToAboutPage = () => {
+    closeNav()
+    history.push("/about")
+  }
 
 
   const changeTheme = (e) => {
@@ -22,7 +30,7 @@ function Navbar({ widthNav, setWidthNav, theme, setTheme }) {
         &times;
       </div>
       <div className="btn-container">
-        <button>About</button>
+        <button onClick={gotToAboutPage}>About</button>
         <button onClick={changeTheme}>
           {theme.mode === "Dark" ? "Light" : "Dark"}
         </button>

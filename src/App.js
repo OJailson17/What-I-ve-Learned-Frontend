@@ -16,6 +16,7 @@ import "./App.css";
 import CreatePost from "./pages/Posts/CreatePost";
 import CategoryPost from "./pages/Posts/ShowPosts";
 import EditPost from "./pages/Posts/EditPost";
+import About from "./pages/About/About";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -72,6 +73,7 @@ function App() {
               authenticated={authenticated.isLogged}
               component={EditPost}
             />
+            <ProtectedRoutes exact path="/about" authenticated={authenticated.isLogged} component={About} />
           </>
         </Switch>
       </Router>
