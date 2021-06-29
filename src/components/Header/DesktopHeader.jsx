@@ -24,9 +24,9 @@ function DesktopHeader({ style, theme, setTheme }) {
     <header style={style}>
       <div className="header-container">
         <div className="logo">
-          <a href="/">
+          <Link to="/">
             <h1>What I've Learned</h1>
-          </a>
+          </Link>
         </div>
         <div className="header-links" hidden={!authenticated.isLogged}>
           <ul>

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import {Link} from 'react-router-dom'
 import { dataContext } from "../../Context";
 import Navbar from "../Navbar/Navbar";
 
@@ -17,9 +18,9 @@ function MobileHeader({ theme, setTheme }) {
       <header>  
         <div className="header-container">
           <div className="logo">
-            <a href="/">
+            <Link to="/">
               <h1>What I've Learned</h1>
-            </a>
+            </Link>
           </div>
           <div
             className="burger-menu"

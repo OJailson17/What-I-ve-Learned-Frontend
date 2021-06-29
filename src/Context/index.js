@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useEffect, useState } from "react";
 import storage from "local-storage-fallback";
 
 export const dataContext = createContext();
 
 const getLoggedInfo = () => {
-  const isLogged = storage.getItem("isLogged");
+  const isLogged = storage.getItem("isLogged") || sessionStorage.getItem("isLogged")
   return isLogged ? JSON.parse(isLogged) : { isLogged: false };
 };
 
@@ -26,6 +27,7 @@ export const ApplicationProvider = ({ children }) => {
   const [userId, setUserId] = useState(userInfo?._id)
   const [allPosts, setAllPosts] = useState([])
   const [pageLocation, setPageLocation] = useState("")
+  const [isChecked, setIsChecked] = useState(true)
 
   
   
@@ -43,7 +45,11 @@ export const ApplicationProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    storage.setItem("isLogged", JSON.stringify(authenticated));
+    if(isChecked) {
+      storage.setItem("isLogged", JSON.stringify(authenticated));
+    } else {
+      sessionStorage.setItem("isLogged", JSON.stringify(authenticated));
+    }
     findUser()
   }, [authenticated]);
 
@@ -72,7 +78,9 @@ export const ApplicationProvider = ({ children }) => {
         theme,
         setTheme,
         pageLocation,
-        setPageLocation
+        setPageLocation,
+        isChecked,
+        setIsChecked
       }}
     >
       {children}

@@ -51,9 +51,8 @@ function Form({
   page,
 }) {
   const classes = useStyles();
-  const { setAuthenticated, setUserInfo, userInfo, userId, setUserId } =
+  const { setAuthenticated, setUserInfo, userInfo, userId, setUserId, isChecked, setIsChecked } =
     useContext(dataContext);
-  const [checked, setChecked] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -118,6 +117,10 @@ function Form({
       .then((data) => setUserInfos(data))
       .catch((err) => console.log(err));
   };
+
+  // const verifyCheckbox = () => {
+  //   if(checked)
+  // }
 
   // Check if the password are equal e call fetch function
   const handleSubmit = (e) => {
@@ -208,11 +211,11 @@ function Form({
         <div className="remember-checkbox" style={hiddenCheckStyle}>
           <Checkbox
             id="check"
-            checked={checked}
+            checked={isChecked}
             color="primary"
             inputProps={{ "aria-label": "secondary checkbox" }}
             onChange={(e) => {
-              setChecked(e.target.checked);
+              setIsChecked(e.target.checked);
             }}
             style={
               theme.mode === "Dark" ? checkboxStyle.dark : checkboxStyle.light
