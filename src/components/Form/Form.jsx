@@ -83,7 +83,7 @@ function Form({
   };
 
   const setToStorage = (token) => {
-    storage.setItem("token", token);
+      storage.setItem("token", token);
   };
 
   const handleFetchError = (err) => {
