@@ -73,7 +73,12 @@ function App() {
               authenticated={authenticated.isLogged}
               component={EditPost}
             />
-            <ProtectedRoutes exact path="/about" authenticated={authenticated.isLogged} component={About} />
+            <ProtectedRoutes
+              exact
+              path="/about"
+              authenticated={authenticated.isLogged}
+              component={About}
+            />
           </>
         </Switch>
       </Router>

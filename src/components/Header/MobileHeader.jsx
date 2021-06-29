@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { dataContext } from "../../Context";
 import Navbar from "../Navbar/Navbar";
 
@@ -8,14 +8,14 @@ import "./Header.css";
 function MobileHeader({ theme, setTheme }) {
   const [widthNav, setWidthNav] = useState(0);
 
-  const { authenticated } = useContext(dataContext)
+  const { authenticated } = useContext(dataContext);
   const openNav = () => {
     setWidthNav(100);
   };
 
   return (
     <>
-      <header>  
+      <header>
         <div className="header-container">
           <div className="logo">
             <Link to="/">

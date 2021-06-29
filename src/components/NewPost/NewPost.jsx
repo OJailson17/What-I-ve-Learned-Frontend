@@ -20,11 +20,10 @@ const buttonStyles = {
 };
 
 const getUserId = () => {
-  return storage.getItem("userId")
-}
+  return storage.getItem("userId");
+};
 
 function NewPost() {
-  
   return (
     <a href={`${getUserId()}/post/create`} style={buttonStyles}>
       New Post

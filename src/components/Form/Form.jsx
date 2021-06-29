@@ -40,29 +40,27 @@ const checkboxStyle = {
   },
 };
 
-function Form({
-  buttonText,
-  hiddenInput,
-  hiddenCheck,
-  helperText,
-  linkPage,
-  theme,
-  fetchUrl,
-  page,
-}) {
+function Form(props) {
   const classes = useStyles();
-  const { setAuthenticated, setUserInfo, userInfo, userId, setUserId, isChecked, setIsChecked } =
-    useContext(dataContext);
+  const {
+    setAuthenticated,
+    setUserInfo,
+    userInfo,
+    userId,
+    setUserId,
+    isChecked,
+    setIsChecked,
+  } = useContext(dataContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [name, setName] = useState("");
 
   const hiddenInputStyle = {
-    display: hiddenInput ? "none" : "",
+    display: props.hiddenInput ? "none" : "",
   };
   const hiddenCheckStyle = {
-    display: hiddenCheck ? "none" : "",
+    display: props.hiddenCheck ? "none" : "",
   };
 
   useEffect(() => {
@@ -75,15 +73,15 @@ function Form({
   }, [userId]);
 
   const bodyData = () => {
-    return page === "login"
+    return props.page === "login"
       ? { email, password }
-      : page === "signup"
+      : props.page === "signup"
       ? { name, email, password }
       : "Error";
   };
 
   const setToStorage = (token) => {
-      storage.setItem("token", token);
+    storage.setItem("token", token);
   };
 
   const handleFetchError = (err) => {
@@ -106,7 +104,7 @@ function Form({
 
   // API call to backend
   const fetchData = () => {
-    fetch(fetchUrl, {
+    fetch(props.fetchUrl, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -126,7 +124,7 @@ function Form({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (page === "signup") {
+    if (props.page === "signup") {
       if (password === password2) {
         fetchData();
       } else {
@@ -146,7 +144,7 @@ function Form({
             id="name"
             name="name"
             className={
-              theme.mode === "Dark"
+              props.theme.mode === "Dark"
                 ? `${classes.root} form-input`
                 : "form-input"
             }
@@ -155,14 +153,14 @@ function Form({
             autoComplete="off"
             onChange={(e) => setName(e.target.value)}
             value={name}
-            required={!hiddenInput}
+            required={!props.hiddenInput}
           />
           <TextField
             type="email"
             id="email"
             name="email"
             className={
-              theme.mode === "Dark"
+              props.theme.mode === "Dark"
                 ? `${classes.root} form-input`
                 : "form-input"
             }
@@ -178,7 +176,7 @@ function Form({
             id="password"
             name="password"
             className={
-              theme.mode === "Dark"
+              props.theme.mode === "Dark"
                 ? `${classes.root} form-input`
                 : "form-input"
             }
@@ -194,7 +192,7 @@ function Form({
           <TextField
             id="password-repeated"
             className={
-              theme.mode === "Dark"
+              props.theme.mode === "Dark"
                 ? `${classes.root} form-input`
                 : "form-input"
             }
@@ -203,7 +201,7 @@ function Form({
             autoComplete="current-password"
             variant="outlined"
             style={{ ...hiddenInputStyle, ...inputStyle }}
-            required={!hiddenInput}
+            required={!props.hiddenInput}
             onChange={(e) => setPassword2(e.target.value)}
             value={password2}
           />
@@ -218,7 +216,9 @@ function Form({
               setIsChecked(e.target.checked);
             }}
             style={
-              theme.mode === "Dark" ? checkboxStyle.dark : checkboxStyle.light
+              props.theme.mode === "Dark"
+                ? checkboxStyle.dark
+                : checkboxStyle.light
             }
           />
           <label htmlFor="check">Remember me</label>
@@ -230,19 +230,21 @@ function Form({
             color="primary"
             disableElevation
             type="submit"
-            style={theme.mode === "Dark" ? btnStyle.dark : btnStyle.light}
+            style={props.theme.mode === "Dark" ? btnStyle.dark : btnStyle.light}
           >
-            {buttonText}
+            {props.buttonText}
           </Button>
         </div>
         <div className="helper-p">
           <p>
             Don't have an account?{" "}
             <Link
-              style={theme.mode === "Dark" ? linkStyle.dark : linkStyle.light}
-              to={`${linkPage}`}
+              style={
+                props.theme.mode === "Dark" ? linkStyle.dark : linkStyle.light
+              }
+              to={`${props.linkPage}`}
             >
-              {helperText}
+              {props.helperText}
             </Link>
           </p>
         </div>

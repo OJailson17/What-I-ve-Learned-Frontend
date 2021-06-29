@@ -5,7 +5,7 @@ import logo from "../../images/logo-icon.svg";
 
 import "./Navbar.css";
 
-function Navbar({ widthNav, setWidthNav, theme, setTheme}) {
+function Navbar({ widthNav, setWidthNav, theme, setTheme }) {
   const { logOut, pageLocation } = useContext(dataContext);
 
   const history = useHistory();
@@ -34,10 +34,12 @@ function Navbar({ widthNav, setWidthNav, theme, setTheme}) {
         &times;
       </div>
       <div className="btn-container">
-      {pageLocation === "/about"
-      ? <button onClick={goToHomePage}>Home</button>
-      : <button onClick={goToAboutPage}>About</button>}
-        
+        {pageLocation === "/about" ? (
+          <button onClick={goToHomePage}>Home</button>
+        ) : (
+          <button onClick={goToAboutPage}>About</button>
+        )}
+
         <button onClick={changeTheme}>
           {theme.mode === "Dark" ? "Light" : "Dark"}
         </button>

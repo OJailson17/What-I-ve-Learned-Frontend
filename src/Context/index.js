@@ -53,18 +53,19 @@ export const ApplicationProvider = ({ children }) => {
     } else {
       sessionStorage.setItem("isLogged", JSON.stringify(authenticated));
     }
-    
+
+    // Call the function to fetch the posts data
     findUser();
 
-    if(!authenticated.isLogged) {
-      storage.removeItem("token")
-      sessionStorage.removeItem("isLogged")
+    if (!authenticated.isLogged) {
+      storage.removeItem("token");
+      sessionStorage.removeItem("isLogged");
     }
   }, [authenticated]);
 
   // Check if user is logged or not trying to get userId from localstorage
   useEffect(() => {
-    const token = storage.getItem("token") || sessionStorage.getItem("token")
+    const token = storage.getItem("token") || sessionStorage.getItem("token");
     if (!token) setAuthenticated({ isLogged: false });
   }, []);
 
