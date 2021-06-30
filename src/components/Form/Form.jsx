@@ -42,6 +42,7 @@ const checkboxStyle = {
 
 function Form(props) {
   const classes = useStyles();
+
   const {
     setAuthenticated,
     setUserInfo,
@@ -55,6 +56,9 @@ function Form(props) {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [name, setName] = useState("");
+  const [inputError, setInputError] = useState(false);
+  const [emailErrorMsg, setEmailErrorMsg] = useState("");
+  const [passErrorMsg, setPassErrorMsg] = useState("");
 
   const hiddenInputStyle = {
     display: props.hiddenInput ? "none" : "",
@@ -86,6 +90,15 @@ function Form(props) {
 
   const handleFetchError = (err) => {
     console.log(err);
+    setInputError(true);
+
+    if (err.indexOf("Email") !== -1) {
+      setEmailErrorMsg(err);
+    } else if (err.indexOf("Password") !== -1) {
+      setPassErrorMsg(err);
+    } else {
+      return;
+    }
   };
 
   const history = useHistory();
@@ -115,10 +128,6 @@ function Form(props) {
       .then((data) => setUserInfos(data))
       .catch((err) => console.log(err));
   };
-
-  // const verifyCheckbox = () => {
-  //   if(checked)
-  // }
 
   // Check if the password are equal e call fetch function
   const handleSubmit = (e) => {
@@ -156,37 +165,41 @@ function Form(props) {
             required={!props.hiddenInput}
           />
           <TextField
+            error={emailErrorMsg.length > 0}
             type="email"
-            id="email"
+            id="email outlined-error-helper-text"
             name="email"
             className={
-              props.theme.mode === "Dark"
+              props.theme.mode === "Dark" && !inputError
                 ? `${classes.root} form-input`
-                : "form-input"
+                : `${inputError} form-input`
             }
-            label="Email"
+            label={emailErrorMsg.length > 0 ? "Error" : "Email"}
             variant="outlined"
             style={inputStyle}
             autoComplete="off"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            helperText={inputError ? emailErrorMsg : ""}
             required
           />
           <TextField
+            error={passErrorMsg.length > 0}
             id="password"
             name="password"
             className={
-              props.theme.mode === "Dark"
+              props.theme.mode === "Dark" && !inputError
                 ? `${classes.root} form-input`
-                : "form-input"
+                : `${inputError} form-input`
             }
-            label="Password"
+            label={passErrorMsg.length > 0 ? "Error" : "Password"}
             type="password"
             autoComplete="current-password"
             variant="outlined"
             style={inputStyle}
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            helperText={inputError ? passErrorMsg : ""}
             required
           />
           <TextField
