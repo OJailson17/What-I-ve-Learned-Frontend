@@ -57,6 +57,7 @@ function Form(props) {
   const [password2, setPassword2] = useState("");
   const [name, setName] = useState("");
   const [inputError, setInputError] = useState(false);
+  const [nameErrorMsg, setNameErrorMsg] = useState("");
   const [emailErrorMsg, setEmailErrorMsg] = useState("");
   const [passErrorMsg, setPassErrorMsg] = useState("");
 
@@ -89,15 +90,16 @@ function Form(props) {
   };
 
   const handleFetchError = (err) => {
-    console.log(err);
     setInputError(true);
-
-    if (err.indexOf("Email") !== -1) {
+    console.log(err);
+    if (err.indexOf("Email") !== -1 || err.indexOf("email") !== -1) {
       setEmailErrorMsg(err);
-    } else if (err.indexOf("Password") !== -1) {
+    } else if (err.indexOf("Password") !== -1 || err.indexOf("password") !== -1) {
       setPassErrorMsg(err);
+    } else if(err.indexOf("name") !== -1) {
+      setNameErrorMsg(err)
     } else {
-      return;
+      return
     }
   };
 
@@ -149,19 +151,21 @@ function Form(props) {
       <form onSubmit={handleSubmit} className="auth-form">
         <div className="inputs">
           <TextField
+            error={nameErrorMsg.length > 0}
             style={hiddenInputStyle}
             id="name"
             name="name"
             className={
-              props.theme.mode === "Dark"
+              props.theme.mode === "Dark" && !inputError
                 ? `${classes.root} form-input`
-                : "form-input"
+                : `${inputError} form-input`
             }
-            label="Name"
+            label={nameErrorMsg.length > 0 ? "Error" : "Name" }
             variant="outlined"
             autoComplete="off"
             onChange={(e) => setName(e.target.value)}
             value={name}
+            helperText={inputError ? nameErrorMsg : ""}
             required={!props.hiddenInput}
           />
           <TextField
