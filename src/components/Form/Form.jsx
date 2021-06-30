@@ -69,7 +69,7 @@ function Form(props) {
   };
 
   useEffect(() => {
-    setUserId(userInfo._id);
+    setUserId(userInfo?._id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo]);
 

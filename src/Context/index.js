@@ -35,7 +35,7 @@ export const ApplicationProvider = ({ children }) => {
   const findUser = () => {
     fetch(`/api/v1/user/${getUserId()}`)
       .then((res) => res.json())
-      .then((data) => setAllPosts(data.user.posts))
+      .then((data) => data.error ? logOut() : setAllPosts(data.user.posts))
       .catch((err) => console.log(err));
   };
 
@@ -65,8 +65,10 @@ export const ApplicationProvider = ({ children }) => {
 
   // Check if user is logged or not trying to get userId from localstorage
   useEffect(() => {
+    findUser()
     const token = storage.getItem("token") || sessionStorage.getItem("token");
-    if (!token) setAuthenticated({ isLogged: false });
+    const userId = getUserId()
+    if (!token || !userId) setAuthenticated({ isLogged: false });
   }, []);
 
   // Check the user theme preference and set to localstorage
