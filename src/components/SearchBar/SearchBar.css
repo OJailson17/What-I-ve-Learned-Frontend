@@ -1,9 +1,23 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 .search-form {
   width: 100%;
   max-width: 740px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   margin: 50px auto;
 }
 
@@ -16,6 +30,22 @@
   background: var(--veryLightGray);
   padding-left: 22px;
   outline: none;
+}
+
+.search-form > input::-webkit-input-placeholder {
+  color: #5e5e5e;
+}
+
+.search-form > input::-moz-placeholder {
+  color: #5e5e5e;
+}
+
+.search-form > input:-ms-input-placeholder {
+  color: #5e5e5e;
+}
+
+.search-form > input::-ms-input-placeholder {
+  color: #5e5e5e;
 }
 
 .search-form > input::placeholder {

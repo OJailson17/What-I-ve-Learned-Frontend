@@ -1,93 +1,111 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 .posts-wrapper {
-    margin-left: 22px;
-    margin-bottom: 92px;
+  margin-left: 22px;
+  margin-bottom: 92px;
 }
 
 .posts-container {
-  width: 90%;
-  max-width: 700px;
+width: 90%;
+max-width: 700px;
 }
 
-  .post-header {
-    display: flex;
-    justify-content: space-between;
-  }
+.post-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
 
-  .post-title > span {
-    font-size: 17px;
-  }
-  
-  .post-info {
-    width: 100%;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-  }
-  
+.post-title > span {
+  font-size: 17px;
+}
+
+.post-info {
+  width: 100%;
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.post-info .category-name {
+  font-size: 13px;
+}
+
+.post-info .post-date {
+  font-size: 13px;
+}
+
+.post {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.post > div {
+  width: 100%;
+  min-height: 157px;
+  border-radius: 10px;
+  border: 1.5px solid black;
+  padding: 16px;
+}
+
+.post > div > p {
+  font-size: 15px;
+}
+
+.recent {
+  margin-top: 36px;
+}
+
+@media only screen and (max-width: 374px) {
   .post-info .category-name {
-    font-size: 13px;
+    font-size: 11px;
   }
-  
-  .post-info .post-date {
-    font-size: 13px;
-  }
-  
-  .post {
-    width: 100%;
-    margin-top: 16px;
-  }
-  
-  .post > div {
-    width: 100%;
-    min-height: 157px;
-    border-radius: 10px;
-    border: 1.5px solid black;
-    padding: 16px;
-  }
-  
-  .post > div > p {
-    font-size: 15px;
-  }
-  
-  .recent {
-    margin-top: 36px;
-  }
-  
-  @media only screen and (max-width: 374px) {
-    .post-info .category-name {
-      font-size: 11px;
-    }
-  
-    .post-info .post-date {
-      font-size: 11px;
-    }
-    .post > div > p {
-      font-size: 13px;
-    }
-  }
-  
-  @media only screen and (min-width: 768px) {
-    .posts-wrapper {
-      margin-left: calc(100vw - 95vw);
-      width: 90%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  
-  @media only screen and (min-width: 1024px) {
-    .post-info .category-name {
-      font-size: 16px;
-    }
-  
-    .post-info .post-date {
-      font-size: 16px;
-    }
 
-    .posts-wrapper {
-      width: 90%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+  .post-info .post-date {
+    font-size: 11px;
   }
+  .post > div > p {
+    font-size: 13px;
   }
-  
+}
+
+@media only screen and (min-width: 768px) {
+  .posts-wrapper {
+    margin-left: calc(100vw - 95vw);
+    width: 90%;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .post-info .category-name {
+    font-size: 16px;
+  }
+
+  .post-info .post-date {
+    font-size: 16px;
+  }
+
+  .posts-wrapper {
+    width: 90%;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+}

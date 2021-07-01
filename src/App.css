@@ -1,7 +1,15 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-family: "Noto Sans", sans-serif;
 }
 
@@ -40,16 +48,3 @@ a {
 ul li {
   list-style: none;
 }
-
-/* .App {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-} */
-
-/* .load-icon {
-  position: absolute;
-  top: 45%;
-  left: 45%;
-  transform: translate(-50%, -50%);
-} */
