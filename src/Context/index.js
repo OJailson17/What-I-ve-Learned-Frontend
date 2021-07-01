@@ -43,7 +43,7 @@ export const ApplicationProvider = ({ children }) => {
   const logOut = () => {
     storage.removeItem("token");
     setAuthenticated({ isLogged: false });
-    window.location.reload();
+    // window.location.reload();
   };
 
   // Is used to set userId to localstorage or to sessionStorage
@@ -68,7 +68,7 @@ export const ApplicationProvider = ({ children }) => {
     findUser()
     const token = storage.getItem("token") || sessionStorage.getItem("token");
     const userId = getUserId()
-    if (!token || !userId) setAuthenticated({ isLogged: false });
+    if (!token || !userId) logOut()
   }, []);
 
   // Check the user theme preference and set to localstorage
