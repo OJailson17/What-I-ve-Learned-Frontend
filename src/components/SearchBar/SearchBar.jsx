@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect, useState } from "react";
 import { dataContext } from "../../Context";
 
 import "./SearchBar.css";
@@ -15,21 +16,34 @@ const btnStyle = {
 
 function SearchBar({ theme }) {
   const [searchInput, setSearchInput] = useState('')
-  const [foundPosts, setFoundPosts] = useState('')
-  const {allPosts} = useContext(dataContext)
-  // console.log(allPosts);
+  const {allPosts, setPostSearched} = useContext(dataContext)
 
   const searchPost = (event) => {
     event.preventDefault()
 
-    allPosts.map(post => {
+    const postes = allPosts.filter(post => {
       if(post?.title.indexOf(searchInput) !== -1){
-        console.log(post);
+        return post
       } else if (post?.body.indexOf(searchInput) !== -1) {
-        console.log(post);
+        return post
       }
+      
+      return null
     })
+
+    if(postes.length <= 0) {
+      alert("No posts found!")
+    }
+
+    setPostSearched(postes)
   }
+
+  useEffect(() => {
+    if(searchInput === "") {
+      setPostSearched([])
+    }
+  }, [searchInput])
+
 
   return (
     <section className="searchbar-container">

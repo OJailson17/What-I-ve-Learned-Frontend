@@ -30,6 +30,7 @@ export const ApplicationProvider = ({ children }) => {
   const [allPosts, setAllPosts] = useState([]);
   const [pageLocation, setPageLocation] = useState("");
   const [isChecked, setIsChecked] = useState(true);
+  const [postSearched, setPostSearched] = useState([])
 
   // Is used to fetch all the posts from backend API
   const findUser = () => {
@@ -86,6 +87,7 @@ export const ApplicationProvider = ({ children }) => {
         userId,
         setUserId,
         allPosts,
+        setAllPosts,
         logOut,
         theme,
         setTheme,
@@ -93,6 +95,8 @@ export const ApplicationProvider = ({ children }) => {
         setPageLocation,
         isChecked,
         setIsChecked,
+        postSearched,
+        setPostSearched
       }}
     >
       {children}

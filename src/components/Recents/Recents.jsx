@@ -4,12 +4,12 @@ import Post from "../Post/Post";
 
 import "./Recents.css";
 
-function Recents({ theme, posts }) {
+function Recents({ theme, posts, titlePage, hidden }) {
   return (
     <section className="recents-container">
       <div className="section-title">
-        <h3>Recents</h3>
-        <NewPost />
+        <h3>{titlePage}</h3>
+        <NewPost hidden={hidden} />
       </div>
 
       <div className="posts-wrapper">

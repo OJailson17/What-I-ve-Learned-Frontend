@@ -23,9 +23,9 @@ const getUserId = () => {
   return storage.getItem("userId");
 };
 
-function NewPost() {
+function NewPost({hidden}) {
   return (
-    <a href={`${getUserId()}/post/create`} style={buttonStyles}>
+    <a href={`${getUserId()}/post/create`} style={hidden ? {...buttonStyles, display: "none"} : buttonStyles}>
       New Post
       <AddIcon style={{ color: `${blue}` }} />
     </a>
