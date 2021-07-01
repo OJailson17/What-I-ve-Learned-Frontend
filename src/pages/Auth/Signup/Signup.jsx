@@ -10,6 +10,7 @@ function Signup() {
   const history = useHistory();
 
   useEffect(() => {
+    document.title = `What I've Learned - Signup`
     if (authenticated.isLogged === true) {
       history.push("/");
     }

@@ -17,6 +17,7 @@ function About() {
     const {theme, setPageLocation} = useContext(dataContext)
 
     useEffect(() => {
+    document.title = `What I've Learned - About`
       setPageLocation(window.location.pathname)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

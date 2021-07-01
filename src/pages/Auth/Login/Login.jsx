@@ -15,6 +15,7 @@ function Login() {
   const history = useHistory();
 
   useEffect(() => {
+    document.title = `What I've Learned - Login`
     if (authenticated.isLogged === true) {
       history.push("/");
     }
