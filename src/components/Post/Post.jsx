@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import { formatDate } from "../../Helper/formatTime";
+import {formatDate} from '../../Helper/formatTime'
 
 import "./Post.css";
 import storage from "local-storage-fallback";

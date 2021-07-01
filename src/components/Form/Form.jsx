@@ -166,6 +166,7 @@ function Form(props) {
             onChange={(e) => setName(e.target.value)}
             value={name}
             helperText={inputError ? nameErrorMsg : ""}
+            inputProps={{ maxLength: 250 }}
             required={!props.hiddenInput}
           />
           <TextField
@@ -185,6 +186,7 @@ function Form(props) {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             helperText={inputError ? emailErrorMsg : ""}
+            inputProps={{ maxLength: 250 }}
             required
           />
           <TextField
@@ -204,6 +206,7 @@ function Form(props) {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             helperText={inputError ? passErrorMsg : ""}
+            inputProps={{ maxLength: 250 }}
             required
           />
           <TextField
@@ -220,6 +223,7 @@ function Form(props) {
             style={{ ...hiddenInputStyle, ...inputStyle }}
             required={!props.hiddenInput}
             onChange={(e) => setPassword2(e.target.value)}
+            inputProps={{ maxLength: 250 }}
             value={password2}
           />
         </div>

@@ -43,7 +43,14 @@ function Navbar({ widthNav, setWidthNav, theme, setTheme }) {
         <button onClick={changeTheme}>
           {theme.mode === "Dark" ? "Light" : "Dark"}
         </button>
-        <button onClick={logOut}>Log out</button>
+        <button
+          onClick={() => {
+            closeNav();
+            logOut();
+          }}
+        >
+          Log out
+        </button>
       </div>
       <div className="nav-logo">
         <img src={logo} alt="" />
