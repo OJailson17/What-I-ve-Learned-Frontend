@@ -1,6 +1,5 @@
 .posts-wrapper {
   margin-left: 22px;
-  margin-bottom: 92px;
 }
 
 .posts-container {
@@ -22,7 +21,7 @@ max-width: 700px;
 }
 
 .post-info {
-  width: 100%;
+  width: 98%;
   margin-top: 20px;
   display: -webkit-box;
   display: -ms-flexbox;

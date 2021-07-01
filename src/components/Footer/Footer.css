@@ -16,6 +16,7 @@ footer {
       -ms-flex-align: center;
           align-items: center;
   position: absolute;
+  margin-top: 92px;
 }
 
 footer .social-media-container {
