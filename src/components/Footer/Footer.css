@@ -15,8 +15,8 @@ footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  position: absolute;
   margin-top: 92px;
+  position: relative;
 }
 
 footer .social-media-container {

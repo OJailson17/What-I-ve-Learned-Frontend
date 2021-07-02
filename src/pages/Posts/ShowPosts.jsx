@@ -104,7 +104,13 @@ function CategoryPost() {
           </div>
         </div>
         <div className="posts-wrapper posts-wrapper-container">
+        {
+          posts.length <= 0 ? 
+          <div className="not-found-container">
+          <p>Nenhum post encontrado</p>
+          </div> :
           <Post posts={posts} theme={theme} />
+          }
         </div>
       </div>
       <Footer theme={theme} />

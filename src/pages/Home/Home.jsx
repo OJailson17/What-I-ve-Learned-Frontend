@@ -37,10 +37,11 @@ function Home() {
   }, [postsArr]);
 
   return (
+    <>
     <div
       className="app"
       style={{
-        minHeight: "100vh",
+        minHeight: "100%",
         position: "relative",
         paddingBottom: "2.5rem",
       }}
@@ -57,8 +58,9 @@ function Home() {
         <Categories theme={theme} posts={posts} hidden={true} />
       )}
       <Recents theme={theme} posts={posts} titlePage="Recents" hidden={false} />
-      <Footer theme={theme} />
     </div>
+      <Footer theme={theme} />
+      </>
   );
 }
 
