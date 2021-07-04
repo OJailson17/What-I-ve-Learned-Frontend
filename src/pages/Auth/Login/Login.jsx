@@ -3,7 +3,8 @@ import { useHistory } from "react-router-dom";
 
 import Form from "../../../components/Form/Form";
 import PageTitle from "../../../components/PageTitle/PageTitle";
-import { dataContext } from "../../../Context";
+import { AuthContext } from "../../../Context/AuthContext";
+import { ThemeContext } from "../../../Context/ThemeContext";
 
 const styles = {
   width: "100%",
@@ -11,11 +12,12 @@ const styles = {
 };
 
 function Login() {
-  const { authenticated, theme } = useContext(dataContext);
+  const { authenticated } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext);
   const history = useHistory();
 
   useEffect(() => {
-    document.title = `What I've Learned - Login`
+    document.title = `What I've Learned - Login`;
     if (authenticated.isLogged === true) {
       history.push("/");
     }

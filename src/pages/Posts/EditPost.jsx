@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import PostForm from "../../components/PostForm/PostForm";
 import Footer from "../../components/Footer/Footer";
-import { dataContext } from "../../Context";
 import { useParams } from "react-router-dom";
+import { ThemeContext } from "../../Context/ThemeContext";
 
 const titleStyle = {
   textAlign: "center",
@@ -11,7 +11,7 @@ const titleStyle = {
 
 function EditPost() {
   const [postData, setPostData] = useState({});
-  const { theme } = useContext(dataContext);
+  const { theme } = useContext(ThemeContext);
   const { userId, postId } = useParams();
 
   const getPostData = () => {

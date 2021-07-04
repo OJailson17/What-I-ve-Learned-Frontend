@@ -1,19 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { dataContext } from "../../Context";
 import { TextField } from "@material-ui/core";
+import { ThemeContext } from "../../Context/ThemeContext";
 import Post from "../../components/Post/Post";
 import Footer from "../../components/Footer/Footer";
 import { useStyles } from "../../Helper/changeInputColor";
-// import NewPost from '../../components/NewPost/NewPost'
 
 import "./ShowPosts.css";
 import { formatDate } from "../../Helper/formatTime";
+import { AplicationContext } from "../../Context/ApplicationContext";
 
 function CategoryPost() {
   const { category } = useParams();
-  const { allPosts, theme } = useContext(dataContext);
+  const { allPosts } = useContext(AplicationContext);
+  const { theme } = useContext(ThemeContext);
   const [posts, setPosts] = useState([]);
   const [titleSearch, setTitleSearch] = useState("");
   const [dateSearch, setDateSearch] = useState("");
@@ -22,8 +23,8 @@ function CategoryPost() {
   const classes = useStyles();
 
   useEffect(() => {
-    document.title = `What I've Learned - ${category}`
-  }, [])
+    document.title = `What I've Learned - ${category}`;
+  }, []);
 
   useEffect(() => {
     setPosts(allPosts.filter((post) => post.category === category).reverse());
@@ -45,7 +46,9 @@ function CategoryPost() {
           allPosts.filter((post) => post.category === category).reverse()
         )
       : setPosts(
-          posts.filter((post) => formatDate(post.postDate).indexOf(dateSearch) !== -1)
+          posts.filter(
+            (post) => formatDate(post.postDate).indexOf(dateSearch) !== -1
+          )
         );
   }, [dateSearch]);
 
@@ -54,9 +57,7 @@ function CategoryPost() {
       ? setPosts(
           allPosts.filter((post) => post.category === category).reverse()
         )
-      : setPosts(
-          posts.filter((post) => post.body.indexOf(bodySearch) !== -1)
-        );
+      : setPosts(posts.filter((post) => post.body.indexOf(bodySearch) !== -1));
   }, [bodySearch]);
 
   return (
@@ -104,13 +105,13 @@ function CategoryPost() {
           </div>
         </div>
         <div className="posts-wrapper posts-wrapper-container">
-        {
-          posts.length <= 0 ? 
-          <div className="not-found-container">
-          <p>Nenhum post encontrado</p>
-          </div> :
-          <Post posts={posts} theme={theme} />
-          }
+          {posts.length <= 0 ? (
+            <div className="not-found-container">
+              <p>Nenhum post encontrado</p>
+            </div>
+          ) : (
+            <Post posts={posts} theme={theme} />
+          )}
         </div>
       </div>
       <Footer theme={theme} />

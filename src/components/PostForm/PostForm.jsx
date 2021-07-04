@@ -9,13 +9,13 @@ import {
   Button,
 } from "@material-ui/core";
 import { useStyles } from "../../Helper/changeInputColor";
+import { ThemeContext } from "../../Context/ThemeContext";
 
-import { dataContext } from "../../Context";
 
 import "./PostForm.css";
 
 function PostForm({ btnText, fetchUrl, editData, deleteUrl }) {
-  const { theme } = useContext(dataContext);
+  const { theme } = useContext(ThemeContext);
   const [postData, setPostData] = useState({
     title: "",
     category: "",

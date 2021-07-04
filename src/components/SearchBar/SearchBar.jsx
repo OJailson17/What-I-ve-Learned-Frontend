@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
-import { dataContext } from "../../Context";
+import { AplicationContext } from "../../Context/ApplicationContext";
 
 import "./SearchBar.css";
 
@@ -15,35 +15,35 @@ const btnStyle = {
 };
 
 function SearchBar({ theme }) {
-  const [searchInput, setSearchInput] = useState('')
-  const {allPosts, setPostSearched} = useContext(dataContext)
+  const { setPostSearched, allPosts } = useContext(AplicationContext);
+
+  const [searchInput, setSearchInput] = useState("");
 
   const searchPost = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const postes = allPosts.filter(post => {
-      if(post?.title.indexOf(searchInput) !== -1){
-        return post
+    const postes = allPosts.filter((post) => {
+      if (post?.title.indexOf(searchInput) !== -1) {
+        return post;
       } else if (post?.body.indexOf(searchInput) !== -1) {
-        return post
+        return post;
       }
-      
-      return null
-    })
 
-    if(postes.length <= 0) {
-      alert("No posts found!")
+      return null;
+    });
+
+    if (postes.length <= 0) {
+      alert("No posts found!");
     }
 
-    setPostSearched(postes)
-  }
+    setPostSearched(postes);
+  };
 
   useEffect(() => {
-    if(searchInput === "") {
-      setPostSearched([])
+    if (searchInput === "") {
+      setPostSearched([]);
     }
-  }, [searchInput])
-
+  }, [searchInput]);
 
   return (
     <section className="searchbar-container">
@@ -53,7 +53,7 @@ function SearchBar({ theme }) {
           className="search-input"
           autoComplete="off"
           placeholder="Seach for a topic"
-          onChange={e => setSearchInput(e.target.value)}
+          onChange={(e) => setSearchInput(e.target.value)}
           value={searchInput}
           style={theme.mode === "Dark" ? inputStyle : {}}
         />

@@ -3,14 +3,16 @@ import { useHistory } from "react-router-dom";
 
 import Form from "../../../components/Form/Form";
 import PageTitle from "../../../components/PageTitle/PageTitle";
-import { dataContext } from "../../../Context";
+import { AuthContext } from "../../../Context/AuthContext";
+import { ThemeContext } from "../../../Context/ThemeContext";
 
 function Signup() {
-  const { authenticated, theme } = useContext(dataContext);
+  const { authenticated } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext);
   const history = useHistory();
 
   useEffect(() => {
-    document.title = `What I've Learned - Signup`
+    document.title = `What I've Learned - Signup`;
     if (authenticated.isLogged === true) {
       history.push("/");
     }

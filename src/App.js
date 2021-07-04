@@ -10,13 +10,14 @@ import MobileHeader from "./components/Header/MobileHeader";
 import ProtectedRoutes from "./Helper/ProtectedRoutes";
 
 import { useWindowDimensions } from "./Helper/windowDimension";
-import { dataContext } from "./Context";
 
 import "./App.css";
 import CreatePost from "./pages/Posts/CreatePost";
 import CategoryPost from "./pages/Posts/ShowPosts";
 import EditPost from "./pages/Posts/EditPost";
 import About from "./pages/About/About";
+import { ThemeContext } from "./Context/ThemeContext";
+import { AuthContext } from "./Context/AuthContext";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -34,7 +35,8 @@ const GlobalStyle = createGlobalStyle`
 // Application Function
 function App() {
   const { width } = useWindowDimensions();
-  const { authenticated, theme, setTheme } = useContext(dataContext);
+  const { authenticated } = useContext(AuthContext);
+  const { theme, setTheme } = useContext(ThemeContext);
 
   return (
     <ThemeProvider theme={theme}>

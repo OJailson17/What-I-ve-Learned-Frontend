@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { dataContext } from "../../Context";
+import { AplicationContext } from "../../Context/ApplicationContext";
 import logo from "../../images/logo-icon.svg";
 
 import "./Navbar.css";
 
 function Navbar({ widthNav, setWidthNav, theme, setTheme }) {
-  const { logOut, pageLocation } = useContext(dataContext);
+  const { pageLocation, setLogOut } = useContext(AplicationContext);
 
   const history = useHistory();
 
@@ -46,7 +46,7 @@ function Navbar({ widthNav, setWidthNav, theme, setTheme }) {
         <button
           onClick={() => {
             closeNav();
-            logOut();
+            setLogOut(true);
           }}
         >
           Log out

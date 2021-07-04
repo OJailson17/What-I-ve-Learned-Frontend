@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import Lua from "@material-ui/icons/Brightness2";
 import Sol from "@material-ui/icons/Brightness4";
 
-import { dataContext } from "../../Context";
+import { AplicationContext } from "../../Context/ApplicationContext";
 import "./Header.css";
+import { AuthContext } from "../../Context/AuthContext";
 
 const iconStyle = {
   fontSize: "30px",
@@ -12,8 +13,8 @@ const iconStyle = {
 };
 
 function DesktopHeader({ style, theme, setTheme }) {
-  const { logOut } = useContext(dataContext);
-  const { authenticated, pageLocation } = useContext(dataContext);
+  const { authenticated } = useContext(AuthContext);
+  const { setLogOut, pageLocation } = useContext(AplicationContext);
 
   const changeTheme = () => {
     setTheme(theme.mode === "Dark" ? { mode: "Light" } : { mode: "Dark" });
@@ -36,7 +37,7 @@ function DesktopHeader({ style, theme, setTheme }) {
                 <Link to="/about">About</Link>
               )}
             </li>
-            <li onClick={logOut} style={{ cursor: "pointer" }}>
+            <li onClick={() => setLogOut(true)} style={{ cursor: "pointer" }}>
               Log out
             </li>
             <li onClick={changeTheme}>

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { dataContext } from "../../Context";
+import { AuthContext } from "../../Context/AuthContext";
 import Navbar from "../Navbar/Navbar";
 
 import "./Header.css";
@@ -8,7 +8,7 @@ import "./Header.css";
 function MobileHeader({ theme, setTheme }) {
   const [widthNav, setWidthNav] = useState(0);
 
-  const { authenticated } = useContext(dataContext);
+  const { authenticated } = useContext(AuthContext);
   const openNav = () => {
     setWidthNav(100);
   };

@@ -3,8 +3,10 @@ import { Button, Checkbox, TextField } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import storage from "local-storage-fallback";
 
-import { dataContext } from "../../Context";
 import { useStyles } from "../../Helper/changeInputColor";
+import { UserContext } from "../../Context/UserContext";
+import { AuthContext } from "../../Context/AuthContext";
+import { AplicationContext } from "../../Context/ApplicationContext";
 import "./Form.css";
 
 const inputStyle = {
@@ -42,16 +44,10 @@ const checkboxStyle = {
 
 function Form(props) {
   const classes = useStyles();
+  const { setUserInfo, userInfo, userId, setUserId } = useContext(UserContext);
+  const { isChecked, setIsChecked } = useContext(AplicationContext);
+  const { setAuthenticated } = useContext(AuthContext);
 
-  const {
-    setAuthenticated,
-    setUserInfo,
-    userInfo,
-    userId,
-    setUserId,
-    isChecked,
-    setIsChecked,
-  } = useContext(dataContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -94,12 +90,15 @@ function Form(props) {
     console.log(err);
     if (err.indexOf("Email") !== -1 || err.indexOf("email") !== -1) {
       setEmailErrorMsg(err);
-    } else if (err.indexOf("Password") !== -1 || err.indexOf("password") !== -1) {
+    } else if (
+      err.indexOf("Password") !== -1 ||
+      err.indexOf("password") !== -1
+    ) {
       setPassErrorMsg(err);
-    } else if(err.indexOf("name") !== -1) {
-      setNameErrorMsg(err)
+    } else if (err.indexOf("name") !== -1) {
+      setNameErrorMsg(err);
     } else {
-      return
+      return;
     }
   };
 
@@ -117,6 +116,7 @@ function Form(props) {
     }
   };
 
+
   // API call to backend
   const fetchData = () => {
     fetch(props.fetchUrl, {
@@ -127,7 +127,7 @@ function Form(props) {
       method: "POST",
     })
       .then((res) => res.json())
-      .then((data) => setUserInfos(data))
+      .then((data) => {setUserInfos(data);})
       .catch((err) => console.log(err));
   };
 
@@ -160,7 +160,7 @@ function Form(props) {
                 ? `${classes.root} form-input`
                 : `${inputError} form-input`
             }
-            label={nameErrorMsg.length > 0 ? "Error" : "Name" }
+            label={nameErrorMsg.length > 0 ? "Error" : "Name"}
             variant="outlined"
             autoComplete="off"
             onChange={(e) => setName(e.target.value)}
