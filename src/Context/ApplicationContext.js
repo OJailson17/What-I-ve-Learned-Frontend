@@ -15,11 +15,13 @@ export const ApplicationProvider = ({ children }) => {
   const [isChecked, setIsChecked] = useState(true);
   const [allPosts, setAllPosts] = useState([]);
   const [logOut, setLogOut] = useState(false)
+  const BASE_URL = process.env.REACT_APP_API_URL
+
 
 
     // Is used to fetch all the posts from backend API
     const findUser = () => {
-      fetch(`/api/v1/user/${getUserId()}`)
+      fetch(`${BASE_URL}/api/v1/user/${getUserId()}`)
         .then((res) => res.json())
         .then((data) => (data.error ? setLogOut(true) : setAllPosts(data.user.posts)))
         .catch((err) => console.log(err));
