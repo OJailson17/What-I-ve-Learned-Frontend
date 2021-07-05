@@ -57,7 +57,7 @@ function SearchBar({ theme }) {
           value={searchInput}
           style={theme.mode === "Dark" ? inputStyle : {}}
         />
-        <button style={theme.mode === "Dark" ? btnStyle : {}}>Search</button>
+        <button aria-label="Search" style={theme.mode === "Dark" ? btnStyle : {}}>Search</button>
       </form>
     </section>
   );

@@ -25,6 +25,7 @@ function MobileHeader({ theme, setTheme }) {
           <div
             className="burger-menu"
             hidden={!authenticated.isLogged}
+            aria-label="Menu"
             onClick={openNav}
           >
             <div></div>

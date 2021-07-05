@@ -143,6 +143,7 @@ function PostForm({ btnText, fetchUrl, editData, deleteUrl }) {
           type="submit"
           className="post-form-btn"
           variant="contained"
+          aria-label={btnText}
           color="primary"
           style={btnDarkTheme}
         >
@@ -152,6 +153,7 @@ function PostForm({ btnText, fetchUrl, editData, deleteUrl }) {
           className="post-form-btn"
           variant="contained"
           color="primary"
+          aria-label="Delete"
           style={{ ...btnDarkTheme, ...btnText === "Create" ? {display: "none"} : {} }}
           onClick={handleDeletePost}
         >

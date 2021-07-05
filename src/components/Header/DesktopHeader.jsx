@@ -40,7 +40,7 @@ function DesktopHeader({ style, theme, setTheme }) {
             <li onClick={() => setLogOut(true)} style={{ cursor: "pointer" }}>
               Log out
             </li>
-            <li onClick={changeTheme}>
+            <li onClick={changeTheme} title="Change theme" aria-label="Change theme">
               {theme.mode === "Dark" ? (
                 <Sol style={iconStyle} />
               ) : (

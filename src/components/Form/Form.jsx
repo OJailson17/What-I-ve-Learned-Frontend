@@ -250,6 +250,7 @@ function Form(props) {
             variant="contained"
             color="primary"
             disableElevation
+            aria-label="Submit"
             type="submit"
             style={props.theme.mode === "Dark" ? btnStyle.dark : btnStyle.light}
           >
