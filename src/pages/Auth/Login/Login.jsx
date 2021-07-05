@@ -15,6 +15,7 @@ function Login() {
   const { authenticated } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
   const history = useHistory();
+  const BASE_URL = process.env.REACT_APP_API_URL
 
   useEffect(() => {
     document.title = `What I've Learned - Login`;
@@ -34,7 +35,7 @@ function Login() {
         helperText="Sign Up"
         linkPage="/signup"
         theme={theme}
-        fetchUrl="/api/v1/user/login"
+        fetchUrl={`${BASE_URL}/api/v1/user/login`}
         page="login"
       />
     </main>

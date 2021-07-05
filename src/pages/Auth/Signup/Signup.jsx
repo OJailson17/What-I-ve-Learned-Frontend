@@ -10,6 +10,8 @@ function Signup() {
   const { authenticated } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
   const history = useHistory();
+  const BASE_URL = process.env.REACT_APP_API_URL
+
 
   useEffect(() => {
     document.title = `What I've Learned - Signup`;
@@ -30,7 +32,7 @@ function Signup() {
           helperText="Login"
           linkPage="/login"
           theme={theme}
-          fetchUrl="/api/v1/user/register"
+          fetchUrl={`${BASE_URL}/api/v1/user/register`}
           page="signup"
         />
       </main>

@@ -116,10 +116,9 @@ function Form(props) {
     }
   };
 
-
   // API call to backend
   const fetchData = () => {
-    fetch("https://what-i-ve-learned-backend.herokuapp.com/api/v1/user/login", {
+    fetch(props.fetchUrl, {
       headers: {
         "Content-Type": "application/json",
       },

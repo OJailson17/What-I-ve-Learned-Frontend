@@ -12,6 +12,8 @@ const titleStyle = {
 function CreatePost() {
   const { theme } = useContext(ThemeContext);
   const { userId } = useParams();
+  const BASE_URL = process.env.REACT_APP_API_URL
+
 
 
   useEffect(() => {
@@ -27,7 +29,7 @@ function CreatePost() {
         <div className="new-post-title" style={titleStyle}>
           <h1>Create Post</h1>
         </div>
-        <PostForm btnText="Create" fetchUrl={`/api/v1/${userId}/post/create?_method=PATCH`} />
+        <PostForm btnText="Create" fetchUrl={`${BASE_URL}/api/v1/${userId}/post/create?_method=PATCH`} />
       </section>
       <Footer theme={theme} />
     </>

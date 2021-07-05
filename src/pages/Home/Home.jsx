@@ -12,6 +12,8 @@ function Home() {
   const { theme } = useContext(ThemeContext);
   const [posts, setPosts] = useState([]);
   const [postsArr, setPostsArr] = useState([]);
+  const BASE_URL = process.env.REACT_APP_API_URL
+
 
   const setPostsData = (data) => {
     setPostsArr(data);
@@ -20,7 +22,7 @@ function Home() {
   const getRecentPosts = () => {
     const userId = storage.getItem("userId");
 
-    fetch(`/api/v1/${userId}/posts`)
+    fetch(`${BASE_URL}/api/v1/${userId}/posts`)
       .then((res) => res.json())
       .then((data) => setPostsData(data.posts))
       .catch((err) => console.log(err));

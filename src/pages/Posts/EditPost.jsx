@@ -13,9 +13,11 @@ function EditPost() {
   const [postData, setPostData] = useState({});
   const { theme } = useContext(ThemeContext);
   const { userId, postId } = useParams();
+  const BASE_URL = process.env.REACT_APP_API_URL
+
 
   const getPostData = () => {
-    fetch(`/api/v1/${userId}/post/${postId}`)
+    fetch(`${BASE_URL}/api/v1/${userId}/post/${postId}`)
       .then((res) => res.json())
       .then((data) => setPostData(data))
       .catch((err) => console.log(err));
