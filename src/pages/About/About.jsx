@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import Logo from "../../images/logo-icon.svg";
-import MyPhoto from "../../images/myPhoto.jpg";
 import Footer from "../../components/Footer/Footer";
 import { AplicationContext } from "../../Context/ApplicationContext";
 import { ThemeContext } from "../../Context/ThemeContext";
@@ -33,7 +32,7 @@ function About() {
         <div className="about-details">
           <h2>About the developer</h2>
           <div className="details-content">
-            <img loading="lazy" src={MyPhoto} alt="Logomarca" />
+            <img loading="lazy" src="https://ik.imagekit.io/jayllson/myPhoto.jpg" alt="Logomarca" />
             <p>
               <strong>I’m Jailson de Oliveira</strong>, I’m 21 years old. I’m a
               programmer student and I made this application to improve my
